@@ -30,7 +30,6 @@ plot(yield.F.mean,lwd=4,add=TRUE)
 # What percentage of variance does this component explain? 
 # Interpret the plot and the percentage of variance.
 yield.F.pca = pca.fd(yield.F, nharm=1)
-names(ield.F.pca)
-plot(yield.F.pca$harmonics, lwd=3)
+plot(yield.F.pca$harmonics, lwd=3, ylim=c(-1,1))
 yield.F.pca$varprop #0.999982
 
