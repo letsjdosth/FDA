@@ -8,9 +8,9 @@ ts.plot(pinch) # 개형
 head(pinch)
 
 # 1.6.1.a. fit the fd object
-b_spline_basis<-create.bspline.basis(c(1,151), nbasis=15)
+b_spline_basis<-create.bspline.basis(c(1,151), nbasis=15, norder=4)
 pinch.F<-Data2fd(1:151, pinch, b_spline_basis)
-plot(pinch.F)
+plot(pinch.F) #pinch_F_plot.png
 
 #for test
 names(pinch.F)
@@ -18,7 +18,7 @@ pinch.F$coefs
 
 # 1.6.1.b. mean&sd and add to the plot
 pinch.F.mean <- mean(pinch.F)
-pinch.F.mean$coefs #흠..정확한 의미? 노치마다?
+pinch.F.mean$coefs
 
 pinch.F.std <- std.fd(pinch.F)
 pinch.F.std$coefs
@@ -34,13 +34,15 @@ pinch.F.cov <- var.fd(pinch.F)
 dim(pinch.F.cov$coef) #15*15
 grid <- 1:15
 pinch.F.cov.mat = eval.bifd(grid, grid, pinch.F.cov) #<-뭐하는 코드인지?
+par(mfrow=c(1,2), mar=c(4,4,1,1))
 persp(grid, grid, pinch.F.cov.mat, xlab="s", ylab="t", zlab="cov(s,t)")
 contour(grid, grid, pinch.F.cov.mat)
 
 #1.6.1.d
+par(mfrow=c(1,1))
 pinch.F.pca = pca.fd(pinch.F, nharm=4)
 plot(pinch.F.pca$harmonics, lwd=3)
-sum(pinch.F.pca$varprop) #0.98
+pinch.F.pca$varprop
 # nharm : sum of varprop
 # 4 : 0.987
 # 3 : 0.967
