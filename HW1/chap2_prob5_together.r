@@ -17,7 +17,7 @@ num.sample = 50
 # You may choose the values for the Mat´ern covariance function as well as the number of points sampled per curve. 
 # Plot all of the curves and include a curve for the overall mean function.
 
-#generate bump function
+#define bump function
 bump = function(x, c0, r0, a0){
     result = rep(0, length(x))
     for(i in 1:length(x)){
@@ -71,7 +71,7 @@ adjMtSamples = cbind(MtSample.group1, MtSample.group2)
 
 #plot after adjusted by bump function
 par(mfrow=c(1,3))
-plot(times,MtSample.group1[,1],type="n", ylim=c(-3,4))
+plot(times,MtSample.group1[,1],type="n", ylim=c(-3,4), ylab="value")
 for(i in 1:(num.sample/2)){
     points(times, MtSample.group1[,i],type="l", col="red")
     points(times, MtSample.group2[,i], type="l", col="blue")
@@ -81,12 +81,12 @@ points(times, bumpval2, type="l", col="blue", lwd=3)
 points(times, rowMeans(adjMtSamples[,1:(num.sample/2)]), type="l", col="yellow", lwd=3)
 points(times, rowMeans(adjMtSamples[,(num.sample/2+1):num.sample]), type="l", col="green", lwd=3)
 #
-plot(times, bumpval1, type="l", col="red", lwd=3, ylim=c(-3,4))
+plot(times, bumpval1, type="l", col="red", lwd=3, ylim=c(-3,4), ylab="bump function value & group sample mean value")
 points(times, bumpval2, type="l", col="blue", lwd=3)
 points(times, rowMeans(adjMtSamples[,1:(num.sample/2)]), type="l", col="yellow", lwd=3)
 points(times, rowMeans(adjMtSamples[,(num.sample/2+1):num.sample]), type="l", col="green", lwd=3)
 #
-plot(times,MtSample.group1[,1],type="n", ylim=c(-3,4))
+plot(times,MtSample.group1[,1],type="n", ylim=c(-3,4), ylab="mean of bump function value & sample mean value")
 for(i in 1:(num.sample)){
     points(times, adjMtSamples[,i],type="l", col="grey")
 }
@@ -103,19 +103,22 @@ points(times, rowMeans(adjMtSamples), type="l", col="yellow", lwd=3)
 
 # basic fitting to b-spline
 b_spline_basis = create.bspline.basis(c(0,1), nbasis=6)
-adjMtSample.f = smooth.basis(times, adjMtSamples, b_spline_basis)$fd #굳이 par로 smoothing?
-par(mfrow=c(1,1))
+adjMtSample.f = smooth.basis(times, adjMtSamples, b_spline_basis)$fd
+
+#plot: curves before alignment
+par(mfrow=c(1,3))
 plot(adjMtSample.f, ylim=c(-3,4), col='grey'); plot(mean(adjMtSample.f), add=T, lwd=3)
 
 #apply continuous registration
-adjMtSample.f.reg = register.fd(adjMtSample.f) #<-오래걸림
+adjMtSample.f.reg = register.fd(adjMtSample.f) #<-take long~ time
 
-#plot(aligned)
-plot(adjMtSample.f.reg$regfd, col='grey', ylim=c(-3,4)); plot(mean(adjMtSample.f.reg$regfd), add=T, lwd=3, col='red')
+#plot: aligned curves
+plot(adjMtSample.f.reg$regfd, col='grey', ylim=c(-3,4))
+plot(mean(adjMtSample.f.reg$regfd), add=T, lwd=3, col='red')
 
 #plot: compare only mean
-plot(mean(adjMtSample.f), lwd=3, col='grey', ylim=c(-3,4)); plot(mean(adjMtSample.f.reg$regfd), add=T, lwd=3, col='red')
-
+plot(mean(adjMtSample.f), lwd=3, col='black', ylim=c(-3,4))
+plot(mean(adjMtSample.f.reg$regfd), add=T, lwd=3, col='red')
 
 # (c) Carry out an FPCA with one PC on the unaligned and aligned curves separately. 
 # For each, do a simple linear regression of the score onto a dummy variable (coded 0/1) 
@@ -128,7 +131,7 @@ adjMtSample.f.pca = pca.fd(adjMtSample.f, nharm=1)
 adjMtSample.f.reg.pca = pca.fd(adjMtSample.f.reg$regfd, nharm=1)
 
 
-#pca componant plot
+#pca component plot
 par(mfrow=c(1,1))
 plot(adjMtSample.f.pca$harmonics, ylim=c(-3,4))
 plot(adjMtSample.f.reg.pca$harmonics, col='red', add=T)
@@ -142,12 +145,12 @@ un_align_score = adjMtSample.f.pca$score
 align_score = adjMtSample.f.reg.pca$score
 
 par(mfrow=c(1,2))
-lm1= lm(un_align_score ~ dummy_var)
-plot(dummy_var, un_align_score, main='unaligned')
-abline(lm1$coefficient, col='red')
-summary(lm1)
+lm1_unaligned= lm(un_align_score ~ dummy_var)
+plot(dummy_var, un_align_score, ylim=c(-1.5, 1))
+abline(lm1_unaligned$coefficient, col='red')
+summary(lm1_unaligned)
 
-lm2= lm(align_score ~ dummy_var)
-plot(dummy_var, align_score, main='aligned')
-abline(lm2$coefficient, col='red')
-summary(lm2)
+lm2_aligned= lm(align_score ~ dummy_var)
+plot(dummy_var, align_score, ylim=c(-1.5, 1))
+abline(lm2_aligned$coefficient, col='red')
+summary(lm2_aligned)
