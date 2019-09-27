@@ -47,14 +47,15 @@
 \section{Chapter 1}
 \subsection{Problem 1}
 
+\textbf{
 The pinch is a dataset included in the fda package. It consists of 151 measurements of pinch force for 20 replications (curves). 
-
+}
 \subsubsection*{(a)  Convert the pinch data to functional objects using 15 B-splines of order four (cubic splines) and plot the 20 smoothed curves on one graph.}
 To get the result we want, call the fda package and execute the code below.
 
 \begin{Rcode}
     \begin{verbatim}
-b_spline_basis<-create.bspline.basis(c(1,151), nbasis=15)
+b_spline_basis<-create.bspline.basis(c(1,151), nbasis=15, norder=4)
 pinch.F<-Data2fd(1:151, pinch, b_spline_basis)
 plot(pinch.F)
     \end{verbatim}
@@ -89,6 +90,7 @@ on domain $[0,120] \subset \Re$. Then
 \[Mean(x)=\sum_{i=1}^{16}c_ib_i(x)\]
 \[Sd(x)=\sum_{i=1}^{16}s_ib_i(x)\]
 where $c_i$ : -0.31109576, 0.73142704, -1.63349675, 2.72475346, 10.93667264, 6.03218354, 2.28791198, 0.34957598, -0.09607592, -0.16637125, -0.11240041, -0.15664938, -0.10293668, -0.16311715, -0.11897440
+\\
 and $s_i$ : 0.0846463, 0.1182031, -0.0996403, 0.9735739, 0.6517423, 1.1140145, 0.5002106, 0.3255844, 0.1166337, 0.1232983, 0.0639047, 0.0869009, 0.0824064 0.0776430, 0.07207136
 respectively. 
 
@@ -96,7 +98,7 @@ And here is a plot of the result.
 \begin{figure}[hh]
     \centering
     \includegraphics[height=8cm]{pinch_F_mean_var_plot.png}
-    \caption{fitting pinch data using 15 b-splines: \\ Mean is black bold curve, and Sd is red bold curve.}
+    \caption{fitting pinch data using 15 b-splines: \\ Black bold curve is mean, and red bold curve is standard deviation.}
 \end{figure}
 
 
@@ -138,7 +140,7 @@ pinch.F.pca$varprop
     \end{verbatim}
 \end{Rcode}
 
-Firstly, Plot the first 4 eigenfunctions.
+Firstly, I'll plot the first 4 eigenfunctions.
 
 \begin{figure}[hh]
     \centering
@@ -160,22 +162,21 @@ Since the sum of first 2 proportion is 0.9207093, we need only 2 components to r
 
 \newpage
 \subsection{Problem 2}
-
+\textbf{
 For this problem, download the R package fds and use the data set of the United States Federal Reserve interest rates, FedYieldcurve,
 which contains the monthly interest rates from January 1982 to June 2009.
 The x-values are the maturity terms of 3, 6, 12, 60, 84 and 120 months which can be identified with the $t_j$ in this chapter.
 The y-values are the interest rate of the United States Treasury obligations due in x months which can be identified with the $x_n(t_j)$,
-where n is a month in the range January 1982 to June 2009.
+where n is a month in the range January 1982 to June 2009.}
 
-
-Firstly Note that, in R code, variable names are set by
+Firstly Note that, in R code, after \'fds\', \'fda\' libraries are called, variable names are set by
 \begin{Rcode}
     \begin{verbatim}
 yield = FedYieldcurve
 terms = yield$x
     \end{verbatim}
 \end{Rcode}
-FedYieldcurve is in fds package.
+
 
 \subsubsection*{(a) On one graph, plot the interest rates $x(t_j)$ for January 1982 and for June 2009 against the maturity terms $t_j$. How do the interest rates in these two months compare?}
 Run the code below and get a plot before discuss about comparing yield rates.
@@ -190,9 +191,10 @@ points(terms, yield$y[,330], pch=16)
     \includegraphics[height=8cm]{yield_2terms.png}
     \caption{yield points of Jan 1982 and June 2009}
 \end{figure}
-At the maturity of the data exist, we can compare yield rate directly by calculating absolute value of difference.
-But for other maturity value, we should use more than data themself. We may use interpolation technique, or other fitting method like LSE or time series analysis's,
-but here are FDA class, so use method of FDA's! :)
+At the maturity of the data exist, we can compare yield rates directly by calculating square sum of difference, or supremum of absolute value of difference.
+But for other maturity values which are not at datapoint, 
+we should use more than data themself. We may use interpolation technique, or other fitting method like LSE or time series analysis's,
+but since here are FDA class, we may use method of FDA's! :)
 
 \newpage
 \subsubsection*{(b) Convert the yield data to functional objects using bspline basis with four basis functions. 
@@ -209,12 +211,13 @@ yield.F.mean = mean(yield.F)
 plot(yield.F.mean,lwd=4,add=TRUE)
     \end{verbatim}
 \end{Rcode}
-The result plot is,
+The result plot is,\\
 \begin{figure}[hh]
     \centering
     \includegraphics[height=8cm]{yield_bspline4fit}
     \caption{Fitting yield data using b-spline 4 basis:\\Bold curve indicates mean.}
 \end{figure}
+
 The mean curve has increasing shape generally, but the slope goes flatter with maturity becoming longer.
 
 \newpage
@@ -235,7 +238,7 @@ The second line gives the plot of the component function.
     \caption{Fitting yield data using b-spline 4 basis:\\ First component of pca.}
 \end{figure}
 
-Since overall functions has similar form as we view at Figure 6, the shape of the component is also similar to them, especially mean.
+Since overall fitted functions have similar form as we view at Figure 6, the shape of the component also has similar shape to them, especially to the mean curve.
 
 \begin{console}
     \begin{verbatim}
@@ -244,10 +247,11 @@ Since overall functions has similar form as we view at Figure 6, the shape of th
     \end{verbatim}
 \end{console}
 
-Likewise, the proportion of explained variation has high value consisting the above context.
+Likewise, the proportion of explained variation has high value, consisting the above context.
 
 \newpage
 \subsection{Problem 6}
+\textbf{
 In this section we expressed \(x_n(t)=\sum_{m=1}^{M}c_{nm}B_m(t)\). One can show that
 \[\bar{x}_N(t)=\sum_{m=1}^{M}a_mB_m(t) \]
 and
@@ -255,19 +259,20 @@ and
 Find expressions for the coefficients $a_m$ and $b_{mk}$ assuming that the
 $B_m(t)$ are an orthonormal basis:
 \[\int B_m(t)B_k(t)=1_{m=k}\]
-%
+}
+\\
 
-Happily, the solution of this problem is in our lecture note, so I repeat the contents.
+Happily, there is solution of these problems in our lecture note, so I repeat the contents.\\
 Firstly for sample mean, observe that
 \[\bar{x}_N(t)=\frac{1}{N}\sum_{n=1}^{N}x_n=\frac{1}{N}\sum_{n=1}^{N}\sum_{m=1}^{M}c_{nm}B_m(t)=\sum_{m=1}^{M}(\frac{1}{N}\sum_{n=1}^{N}c_{nm})B_m(t)\]
-so if we set \(a_m=\frac{1}{N}\sum_{n=1}^{N}c_{nm}\), we get the expression that we want.
+so if we set \(a_m=\frac{1}{N}\sum_{n=1}^{N}c_{nm}\), we get the expression that we want.\\
 And for sample covariance,
 \[\hat{c}(t,s)=\frac{1}{N-1}\sum_{n=1}^{N}(x_n(t)-\bar{x}(t))(x_n(s)-\bar{x}(s))\]
 then where \(\tilde{c}_{nm}=c_{nm}-a_m\),
 \[=\frac{1}{N-1}\sum_{n=1}^{N}\sum_{m=1}^{M}\sum_{k=1}^{M}\tilde{c}_{nm}\tilde{{c}}_{nk}B_{m}(t)B_{k}(s)\]
 \[=\sum_{m=1}^{M}\sum_{k=1}^{M}(\frac{1}{N-1}\sum_{n=1}^{N}\tilde{c}_{nm}\tilde{{c}}_{nk})B_{m}(t)B_{k}(s)\]
 so if we set \(b_{mk}=\frac{1}{N-1}\sum_{n=1}^{N}\tilde{c}_{nm}\tilde{{c}}_{nk}\), 
-or equivalently using matrix notation \(b_{mk}=(N-1)^{-1}\mathbf{c}^T\mathbf{c}\), we get what we want.
+or equivalently using matrix notation if we set \(b_{mk}=(N-1)^{-1}(\mathbf{\tilde{c}}^T\mathbf{\tilde{c}})_{mk}\), we get what we want.
 
 
 
@@ -284,19 +289,21 @@ For a start, I'll calculate $x^{(i)}(t), i=1,3$. For notational simplicity, I om
 \[x^{(3)}(t) = \sum_{j} \{-a_j\omega^3 j^3 \cos{\omega jt} + b_j\omega^3 j^3 \sin{\omega jt}\}\]
 I notice that when j=1, L become 0 operator. So we can exclude to j=1 case in summation. \\
 Then, our operator are actually
-\[L(x)(t)=\sum_{j}\{a_j\omega^3(j-j^3)\cos{wjt} + i\frac{1}{i}b_j\omega^3(j^3-j)\sin(wjt)\}\]
+\[L(x)(t)=\sum_{j}\{a_j\omega^3(j-j^3)\cos{(wjt)} + i\frac{1}{i}b_j\omega^3(j^3-j)\sin(wjt)\}\]
 Then, using definition of complex sine and cosine function, we can rewrite L as
 \[L(x)(t)=\sum_{j}\sqrt{\frac{(a_j+b_j)^2\omega^6j^2(j^2-1)^2}{2}}e^{i\omega jt}\]
-Then, above form can be seen as formal Fourier expansion form (on a circle $[0,T]$). So, by Parseval's identity,
+Then, above form can be seen as formal Fourier expansion form (on a circle $[0,T(=2\pi/\omega)]$). So, by Parseval's identity,
 \[\frac{\omega}{2\pi} \int_{0}^{T}|L(x)(t)|^2dt = \frac{1}{2}\sum_{j}(a_j+b_j)^2\omega^6j^2(j^2-1)^2\]
-Multiplying $\frac{2\pi}{\omega}$ to both term, we get the equation which we want.
+Multiplying $\frac{2\pi}{\omega}$ to both hand terms, we get the equation which we want.
 
 
 \newpage
 \subsection{Problem 2}
+\textbf{
 Proceed with FedYieldcurve data, which contains the monthly Federal Reserve interest rates, cf. Problem 1.6.2.
+}
 
-Likewise at problem 2 of chapter 1, firstly I set the variables like this of R code.
+Likewise at problem 2 of chapter 1, firstly I set the variables like this of R code after call libraries.
 \begin{Rcode}
     \begin{verbatim}
 yield.J1982 = FedYieldcurve$y[,1]
@@ -342,7 +349,6 @@ yield.F6.S1 = smooth.basis(terms, yield.J1982, par.F6.S1)
 
 par(new=T)
 plot(yield.F6.S1, xlim=c(0,120), ylim=c(12.5,15.5), ylab="", xlab="", col='red')
-yield.F6.S1$gcv
     \end{verbatim}
 \end{Rcode}
 
@@ -351,25 +357,25 @@ Then we get below plot.
 \begin{figure}[hh]
     \centering
     \includegraphics[height=8cm]{1982Jyield_raw_bspline4_bspline6.png}
-    \caption{January 1982 yield: \\ gray: raw data, and black : fitted curve using 4 b-splines, red : fitted curve using 6 b-splines.}
+    \caption{January 1982 yield: \\ gray: raw data \\ black : fitted curve using 4 b-splines \\ red : fitted curve using 6 b-splines.}
 \end{figure}
 
 Since the number of basis increases and we are using polynomial basis, the fitted curve with 6-basis has more variation,
-and consquently it seems to get worse comparing to (a)'s 4 basis cases to explain original (raw) line. 
-This phenomenon is similar to the outcome of ordinary overfitting cases raised by too high order polynomial model for fitting to small (point) dataset,
-and at our functional data case where the order consists the number of basis, corresponds to our intuition.
-(Note that although here 'is' the term "order" which means other things that i.e. the (polynomial) order of each b-spline,
-so statement like above may make some confusing, but I think an increasing of 'the order' of each b-splines also gives similar conclusion,
-thus 'intuitively' the statement still has some consistence of too-high-basis-number case like above.)
+and consquently it seems to get worse comparing with (a)'s 4 basis case to explain original (raw) line (in fact, points). 
+This phenomenon is similar to the outcome of typical overfitting cases raised by too high order polynomial model for fitting to small (point) dataset.
+And at our functional data case where the order consists the number of basis, above result consists with our intuition.
+(Note that although here, the functional analysis, is the term "order" which means other things that i.e. the (polynomial) order of each b-spline,
+so statement like above may make some confusing, but I think an increasing of 'the order' of each b-splines also gives similar effect and yields similar conclusion,
+'intuitively' the statement still has some consistence with too-high-basis-number case like above.)
 
 \newpage
 \subsubsection*{(c) Repeat part (b) with several other smoothing parameters $\lambda$. Which $\lambda$ gives the most informative smooth curve?}
 
 For finding enoughly best $\lambda$ value to satisfiablely most(?) informative smooth curve,
-I'll consider candidates of $\lambda$ value which are integers from 1 to 200. 
-(For 'the most', we should explore more deliberate floting number, but I'll skip this for simplicity.)
-And as a criterion, I'll calculate GCVs - a kind of validation measure for fitting - for each $\lambda$ cases,
-and choose the $\lambda$ value which gives the lowest GCV value. \\
+I will consider candidates of $\lambda$ value which are integers from 1 to 200. 
+(For 'the most', we should explore more deliberately including floating number, but I'll skip this for simplicity, and just take an integer value.)
+And as a criterion, I will calculate GCVs - a kind of validation measure for fitting - for each $\lambda$ cases,
+and choose a $\lambda$ value which gives the lowest GCV value. \\
 run the below code.
 \begin{Rcode}
     \begin{verbatim}
@@ -393,8 +399,8 @@ the output of last line give best $\lambda$ value to us.
     \caption{January 1982 yield: GCVs for each $\lambda$:\\ smoothed by penalized smoothing method with 2nd derivative operator, fitted using 6 b-splines.}
 \end{figure}
 
-And minimum GCV value is at $\lambda=91$. So, I'll repeat smoothing and fitting procedure with the $\lambda$ value,
-and get a fitted curve. And additionally, I'll plot second derivative curves for each. \\Run this code.
+And minimum GCV value is at $\lambda=91$. So, I'll repeat the smoothing and fitting procedure with the $\lambda=91$ value,
+and get a fitted curve. Additionally, I'll plot second derivative curves for each. \\Run this code block.
 \begin{Rcode}
     \begin{verbatim}
 #take lambda=91
@@ -431,7 +437,7 @@ Then, we get below plots.
 \end{figure}
 
 On the plots, we can verify the effect of smoothing with chosen $\lambda=91$ value by watching blue curve.
-On whole of maturity interval $[0,120]$, the blue curve of right plot has 2nd derivative value closer to 0 comparing to red curve,
+On whole of maturity interval $[0,120]$, the blue curve of right plot, 2nd derivative of $\lambda=91$, has values closer to 0 comparing with red curve, of $\lambda=1$,
 and also blue curve of left plot is better to explain original rate comparing to red one.
 And Generally, on most part of domain interval, blue curve shows good performance as black curve which is fitted with 3 b-spline basis.
 
@@ -441,8 +447,10 @@ So, consquently, it is important to choose proper number of basis and smoothing 
 
 \newpage
 \subsection{Problem 5}
+\textbf{
 In this problem, we will explore some potential dangers of curve alignment. 
 A bump function centered at a value $c_0$, with radius $r_0$, and amplitude $a_0$ is defined as 
+}
 \begin{equation*}
     f(x) = \begin{cases}
         a_0\exp{\{-(1-(\frac{x-c_0}{r_0}^2)^{-1})\}} &\text{if } |x-c_0|<r_0 \\
@@ -455,9 +463,9 @@ For the second half use $(c_0,r_0,a_0)=(5/8,1/4,5)$.
 You may choose the values for the Mat\'{e}rn covariance function as well as the number of points sampled per curve.
 Plot all of the curves and include a curve for the overall mean function.}
 
-Following direction of problem, run this code to generate Mat\'{e}rn process and plot results.
-For parameters of covariance of Mat\'{e}rn process, I choose $\sigma^2=1, \rho=0.1, \nu=0.5$ respectively,
-and for number of points, I take 100 on $[0,1)$ (see 'times' variable on the code).
+Following direction of problem, run this code and generate Mat\'{e}rn process and plot results.
+As parameters of covariance of Mat\'{e}rn process, I choose $\sigma^2=1, \rho=0.1, \nu=0.5$ respectively,
+and as number of points, I take 100 on $[0,1)$ (more exactly, see 'times' variable on the code).
 
 \begin{Rcode}
     \begin{verbatim}
@@ -544,32 +552,32 @@ Last code block gives plots for simulated process and mean of them.
 \begin{figure}[hh]
     \centering
     \includegraphics[height=6.3cm]{matern_verify_sim.png}
-    \caption{Mat\'{e}rn process}
+    \caption{Mat\'{e}rn process: generated samples\\(there is detailed information on body text.)}
 \end{figure}
 
-Each curve on plots indicates,
+Each curve on result plots at below indicates,
 \begin{itemize}
     \item{\textbf{left:} plot of whole processes with group infomation.\\
     red \& blue color indicates the group (first 25s \& last 25s) respectively.\\
     bold red \& blue curve are bump functions of groups. (group's theorical-population mean)\\
     and bold yellow and green curve are realized pointwise mean of each group. (group's sample mean)}
     \item{\textbf{middle:} draw only group mean curves from left one.}
-    \item{\textbf{right:} plot of whole process without group information.\\
+    \item{\textbf{right:} plot of whole processes without group information.\\
     grey curves are 50 generated processes.\\
     bold black curve is mean of 2 bump functions. (theorical mean of total process)\\
     and bold yellow curve is mean of realized pointwise process. (total sample mean)}
 \end{itemize}
 
-By comparing sample mean curves to theorical one, we can verify that simulated processes are properly generated to our purpose.
+By comparing sample mean curves to theorical one, we can see that simulated processes are properly generated to our purpose.
 
 
 \newpage
 \subsection*{(b) Align the curves using continuous registration. Plot the resulting curves and include a mean function. 
 Comment on any differences with (a) and if the registered curves exhibit any odd patterns.}
 
-Firstly, I do fitting process to get the functional object using 6 b-spline basis.
+Firstly, I do fitting process to get the functional object using 6 b-spline basis. (6 is arbitrarily chosen number.)
 And next, I carry out the alignment procedure using continuous registration method.
-Then finally, I plot the curves fitted of before \/ after the alignment.
+Then finally, I plot the curves fitted of before and after the alignment.
 
 Run the code below.
 \begin{Rcode}
@@ -619,9 +627,9 @@ Each curve on plots indicates,
 
 Because we generated processes through transforming Mat\'{e}rn processes of same covariance structure 
 by 2 bump function whose shapes are same except only location, the effect of the alignment is enormous.
-The gray curves of aligned plot are adjust to go up and down nearly same points (respectively) for most observations
-comparing to unaligned's gray curves, and the mean curve of aligned one is more explanatory than unaligned one, 
-especially showing higher amplitude(function value) which replects each curve more exactly.
+The gray curves of aligned plot are adjusted to move with harmony, up and down at respective neighborhoods on x-axis for most observations
+comparing with unaligned's gray curves. And as a result of alignment, a the mean curve of aligned one is more explanatory than unaligned one, 
+especially showing higher amplitude(function value) which reflects each sample (gray) curve more exactly.
 
 
 \newpage
@@ -632,7 +640,7 @@ Calculate a p-value to determine if the estimated slope parameters you get are s
 Compare with the aligned and unaligned curves. What did aligning do to the p-value? 
 You may want to rerun your simulations a few times to see how the p-values change.}
 
-Execute below code for doing pca with a 1 component and calculating p-value after least-square estimation of score onto group category variable.
+Execute below code for doing pca with an one component and calculating p-value after least-square estimation of score onto group category variable.
 \begin{Rcode}
     \begin{verbatim}
 #pca
@@ -646,20 +654,20 @@ plot(adjMtSample.f.reg.pca$harmonics, col='red', add=T)
     \end{verbatim}
 \end{Rcode}
 
-Firstly, we examine the results of PCA for each case. Below is plot of first component eigenfunction of each.
+Firstly, we examine the results of PCA for each case. Below is plot of first eigenfunction of each aligned and unaligned case.
 
 \begin{figure}[hh]
     \centering
-    \includegraphics[height=7cm]{matern_pca_component.png}
+    \includegraphics[height=8cm]{matern_pca_component.png}
     \caption{Mat\'{e}rn process: PCA before \& after alignment \\
     black : 1st component of pca of before alignment case\\
     red : 1st component of pca of after alignment case}
 \end{figure}
 
-Observe that, by alignment, the component moves to right, direction to mean. It is effect of continuous registration,
+Observe that, by alignment, the component moves to right, direction to the total mean. It is effect of continuous registration,
 since the method aligns curves with the mean's location.
 
-We can also get the proportion of explained variation by the first component, for each case.
+We can also get the proportion of explained variation by the first component in R, for each case.
 \begin{console}
     \begin{verbatim}
 > adjMtSample.f.pca$varprop
@@ -668,14 +676,14 @@ We can also get the proportion of explained variation by the first component, fo
 [1] 0.7315676
     \end{verbatim}
 \end{console}
-The proportion are doubled! It consists the big effect of alignment as we see when examine mean curves. \\
-(In fact, the increased variance proportion is NOT observed all the simulation cases. It depends on simulated
-process's general shapes (when each process path are more similar, more improvement!), 
-so in general, if we simulate with other random-seed value or simply repeat simulation, the size of improvement does NOT reach
+The proportion are doubled! It consists the big effect of alignment which we discover when examine mean curves. 
+(In fact, the result - increased variance proportion - is NOT observed all simulation cases. It depends on simulated
+random processes' degree of similarity of general shapes (when each process path are more similar, more improvement!), 
+so in general, if we simulate with other random-seed value or simply repeat simulation more times, the size of improvement does NOT reach
 to double through alignment, even there can be cases for decrease after alignment.)
 
-In succession, I will do least square fit of score, 
-so make the dummy variable, call simple regression code to each case,
+In succession, I will do least square fit of score onto group index. 
+For this work, I will make the dummy variable, call simple regression code to each case,
 and plot the result and get p-value of slope following the direction of problem.
 Run below code.
 \begin{Rcode}
@@ -701,7 +709,7 @@ The results are,
 
 \begin{figure}[hh]
     \centering
-    \includegraphics[height=7cm]{matern_score_reg.png}
+    \includegraphics[height=6.8cm]{matern_score_reg.png}
     \caption{Mat\'{e}rn process: regression of score onto group dummy variable\\
     left: before alignment, right: after alignment
     0: first 25 group, 1: last 25 group
@@ -710,39 +718,31 @@ The results are,
 \begin{console}
     \begin{verbatim}
 > summary(lm1_unaligned)
-
 Call:
 lm(formula = un_align_score ~ dummy_var)
-
 Residuals:
      Min       1Q   Median       3Q      Max
 -0.94443 -0.20165  0.06072  0.24753  0.54723
-
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
 (Intercept)  0.40993    0.06706   6.113 1.68e-07 ***
 dummy_var   -0.81987    0.09483  -8.646 2.37e-11 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
 Residual standard error: 0.3353 on 48 degrees of freedom
 Multiple R-squared:  0.6089,    Adjusted R-squared:  0.6008
 F-statistic: 74.75 on 1 and 48 DF,  p-value: 2.371e-11
 
 > summary(lm2_aligned)
-
 Call:
 lm(formula = align_score ~ dummy_var)
-
 Residuals:
     Min      1Q  Median      3Q     Max
 -1.3657 -0.3425 -0.1131  0.1634  7.6486
-
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
 (Intercept)  -0.1077     0.2387  -0.451    0.654
 dummy_var     0.2154     0.3375   0.638    0.526
-
 Residual standard error: 1.193 on 48 degrees of freedom
 Multiple R-squared:  0.008415,  Adjusted R-squared:  -0.01224
 F-statistic: 0.4074 on 1 and 48 DF,  p-value: 0.5263
@@ -752,7 +752,7 @@ F-statistic: 0.4074 on 1 and 48 DF,  p-value: 0.5263
 We can observe that,
 \begin{itemize}
     \item {Before alignment, the slope value of the regression result is significantly NOT 0 
-    since the p-value of coefficient are 2.37e-11, very small value.}
+    since the p-value of slope coefficient are 2.37e-11, very small value.}
     \item {After alignment, the p-value corresponds to slope coefficient is 0.526, so we can make a
     conclusion that the slope is statistically 0.
     }
@@ -765,39 +765,32 @@ It may be able to be explained by below intuition.
 \begin{itemize}
     \item{For case of before alignment, although there were 2 types of shape of processes, we use only an 1 component.
     So in fitting process using the eigenfunction to each for original process (or similarly curve fitted by b-spline basis earlier),
-    naturally the score - the scalar value multiplied to the component to make nearest fit- are 2-grouped. 
+    naturally the score - the scalar value multiplied to the component to make nearest fit to each observation - are 2-grouped. 
     And the result is presented by significant slope value with low p-value in above regression.}
-    \item{While, for the case of after alignment, all (or just, most) fitted curves by b-spline basis are 
-    have similar shape. So in fitting process using an eigenfunction,
-    all multipliers of the function to make nearest fit become to have also similar values.
-    And it makes the result that the non-significant coefficient of dummy variable with high p-value in above regression.}
+    \item{While, for the case of after alignment, all (or most) fitted curves by b-spline basis are 
+    have similar shape by alignment step. So in fitting process using an eigenfunction,
+    all multipliers of the function to make nearest fit become having similar values.
+    And it makes the result that the coefficient of dummy variable is NOT significant with high p-value in above regression.}
 \end{itemize}
 
 
 
-\newpage
+
 \subsection*{(d) Come up with one potential setting/application 
 where you might lose something if you align. Make up whatever scenario you like, but think it through.}
 
-As we see above example simulation, the alignment procesure delete some information about location which
-curves moves specially on a step in respectively tuned clock but the shape that moves are similar for each observation.
+As we see above example simulation, the alignment procesure deletes some information about location which
+curves moves specially on some time which follows respectively tuned clock for each sample but the moving shapes are similar for each observation.
 Thus, for perpose of inference, if the triggered time at which value starts to move specifically is important information, We SHOULD NOT do alignment procedure.
 
 
 A toy example situration is here:\\
 We want to know the distribution of age that boys start to grow faster in adolescence period 
-by begining a secondary sexual characteristics. So we get some samples that forms of functional-data.
+by begining a secondary sexual characteristics. And we get some samples that form of functional-data.
 
-In this case, if we align the curves, we lose information about 'starting age' of most boys, and
-unintentionally emphasize some unnecessary information like the length of growth.
-Consquently, we will fail to infer properly from the data, cannot achieve the purpose - getting distribution of starting age.
+In this case, if we align the curves, we lose information about 'starting age' of most boys, instead
+we unintentionally emphasize some unnecessary information like a mean growing length of them.
+Consquently, we will fail to infer properly from the data contextually, cannot achieve the purpose - getting distribution of starting age.
 
 
 \end{document}
-
-%R CODE TEMPLATE
-\begin{Rcode}
-    \begin{verbatim}
-        
-    \end{verbatim}
-\end{Rcode}

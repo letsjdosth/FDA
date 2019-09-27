@@ -24,3 +24,6 @@
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+
+#compressed
+*.zip
