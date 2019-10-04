@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,setspace,verbatim,graphicx,enumerate,enumitem}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in,nohead,nofoot]{geometry}
+\usepackage{caption}
+% \usepackage{subcaption}
+% \usepackage{subfig}
+% \usepackage{subfloat}
+% \usepackage{tabularx}
+\usepackage{mdframed}
+
+\newenvironment{Rcode}% environment name 
+{%begin code
+    \begin{mdframed}
+    \#R code
+    \begin{small}
+}
+{%end code
+    \end{small}
+    \end{mdframed}
+}
+
+\newenvironment{console}% environment name 
+{%begin code
+    \begin{mdframed}
+    \#Console
+    \begin{small}
+}
+{%end code
+    \end{small}
+    \end{mdframed}
+}
+
+\begin{document}
+\title{FDA Homework 2}
+\author{Seokjun Choi}
+\date{October 18, 2019}
+\maketitle
+
+\section{Chapter 10}
+\subsection{Problem 2}
+
+\textbf{
+Show that in any inner product space, the function $y\rightarrow<x,y>$ is continuous where x is arbitary element of that inner product space.
+}
+
+Let $\mathcal{H}$ be an inner product space, \(\{f_n\}\) be a sequence in $\mathcal{H}$
+such that converges to $f\in\mathcal{H}$ in norm sense. \\
+For $x\in\mathcal{H}$, consider below relation.
+\[|<x, f_n>-<x,f>|^2 = |<x, f_n-f>|^2 \leq ||x||^2||f_n-f||^2\]
+Last inequality comse from Cauchy-Schwartz inequality. Then when $n\rightarrow\infty$, by our setting $||f_n-f||\rightarrow0$, so
+\[lim_{n\rightarrow\infty}|<x, f_n>-<x,f>|^2\leq 0\]
+Then
+\[lim_{n\rightarrow\infty}<x, f_n>-<x,f>= 0\]
+Thus, \(lim_{n\rightarrow\infty}<x, f_n> = <x,f>\) and the inner product operator is preserve the limit.
+It is equivalent statement that inner product operator is continuous.
+
+
+\subsection{Problem 6}
+\textbf{
+    Suppose $\{e_j,j>=1\}$ is a complete orthonormal sequence in a Hilbert space. 
+    Show that if $\{f_j,j>=1\}$ is an orthonormal sequence satisfying
+    \[\sum_{j=1}^\infty ||e_j-f_j||^2<1\]
+    then $\{f_j,j>=1\}$ is also complete.
+}
+
+\subsection{Problem 10}
+\textbf{
+    Suppose $\{e_j,j>=1\}$ and $\{f_i,i>=1\}$ are orthonormal bases in $\mathcal{H}$.
+    Show that for any Hilbert-Schmidt operators $\Psi,\Phi$
+    \[\sum_{i=1}^{\infty} <\Psi(f_i), \Phi(f_i)> = \sum_{j=1}^{\infty} <\Psi(e_j),\Phi(e_j)>\]
+}
+
+Firstly note that $f_i=\sum_{j=1}^\infty<f_i,e_j>e_j$, 
+and since $\Phi$ are Hilbert-Schmidt, there are adjoint operator  $\Phi^*$.
+Using these facts,
+\[\sum_{i=1}^{\infty} <\Psi(f_i), \Phi(f_i)>
+= \sum_{i=1}^{\infty} <\Phi^*\Psi(f_i), f_i> 
+= \sum_{i=1}^\infty <\Phi^*\Psi\sum_{j=1}^\infty (f_i,e_j)e_j, \sum_{k=1}^\infty (f_k,e_k)e_j>\]
+then
+\[=\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j>\bar{<f_i,e_k>}<\Phi^*\Psi(e_j),e_k>
+=\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j><e_k,f_i><\Phi^*\Psi(e_j),e_k>\]
+then when $j\neq k$, the term becomes 0.(why?)
+so, only $j=k$ cases remain, so we rewrite above equation as
+\[=\sum_{i=1}\sum_{j=1} <f_i,e_j><e_j,f_i><\Phi^*\Psi(e_j),e_j>\]
+Since the operaters are Hilbert-Schmidt, the value of absolute summation is bounded,
+and we can interchange the summation order. then
+\[=\sum_{j=1}\sum_{i=1} <f_i,e_j><e_j,f_i><\Phi^*\Psi(e_j),e_j>
+=\sum_{j=1}\sum_{i=1}|<f_i,e_j>|^2<\Phi^*\Psi(e_j),e_j>\]
+\[=\sum_{j=1} <\Phi^*\Psi(e_j),e_j>
+=\sum_{j=1} <\Phi^*\Psi(e_j),e_j>
+\]
+$\sum_{i=1}|<f_i,e_j>|^2 = 1$ since it coincide the definition of norm square, 
+and each element is in orthornormal set.
+\[=\sum_{j=1} <\Psi(e_j),\Phi(e_j)>
+    \]
+
+
+
+\subsection{Problem 12}
+\textbf{
+    Show that if $L$ is bounded then $L^*$ is also bounded, and
+    \[||L^*||_{\mathcal{L}}=||L||_{\mathcal{L}}, \quad  
+    ||L^*L||_{\mathcal{L}}=||L||^2_{\mathcal{L}}
+    \]
+}
+
+
+\end{document}
