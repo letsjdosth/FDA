@@ -57,11 +57,44 @@ It is equivalent statement that inner product operator is continuous.
 
 \subsection{Problem 6}
 \textbf{
-    Suppose $\{e_j,j>=1\}$ is a complete orthonormal sequence in a Hilbert space. 
-    Show that if $\{f_j,j>=1\}$ is an orthonormal sequence satisfying
+    Suppose $\{e_j,j\geq 1\}$ is a complete orthonormal sequence in a Hilbert space. 
+    Show that if $\{f_j,j\geq 1\}$ is an orthonormal sequence satisfying
     \[\sum_{j=1}^\infty ||e_j-f_j||^2<1\]
-    then $\{f_j,j>=1\}$ is also complete.
+    then $\{f_j,j\geq 1\}$ is also complete.
 }
+
+Firstly, I claim that $e_j$ and $f_j$ are not orthorgonal. \\
+Consider a simple case that only one component of fixed $j$ index are different $e_j$ from $f_j$. then,
+If $e_j, f_j$ are orthonormal, the by Pythagorean theorem, $||e_j-f_j||^2=||e_j||^2+||f_j||^2=1+1=2$
+since $e_j$ and $f_j$ are unit elements. But under our assumption
+\[||e_j-f_j||^2=<e_j-f_j, e_j-f_j>=<e_j, e_j>-<e_j,f_j>-<f_j,e_j>+<f_j,f_j>\]
+\[=||e_j||^2+||f_j||^2-(<e_j,f_j>+<f_j,e_j>) = 2-(<e_j,f_j>+<f_j,e_j>) < 1\]
+so in our case, $||e_j-f_j||^2$ always cannot have the value 2, and 
+\[<e_j,f_j>+<f_j,e_j>=<e_j,f_j>+\overline{<e_j,f_j>}=2Re(<e_j,f_j>)\] cannot become 0,
+neither can $<e_j,f_j>$.
+Both viewing norm value and inner product value show that they are not orthogonal.
+Thus the claim is proved for simple case.
+
+Next, consider many j-th components can be different $e_j$ from $f_j$. But above claim still holds, because
+\(\sum_{j=1}^\infty ||e_j-f_j||^2<1\) and all norm values must be nonnegative,
+none of j-th component of $||e_j-f_j||$ can be greater then 1 like the simple case, 
+and $<e_j,f_j>+<f_j,e_j>=2Re(<e_j,f_j>)$ cannot be 0 for all $j$.
+So above claim is proved for whole case.
+
+
+Then from the result of claim, if we express $f_j$ as the linear combination of $\{e_i\}$, 
+then $f_j$ always has $e_j$ component with nonzero coefficient.
+(More precisely, use Gram-Schmidt process, or just project $f_j$ onto $e_j$.
+then since $f_j$ is not orthogonal to $e_j$, by property of separable Hilbert space's orthonormal basis,
+we get $e_j$ component of nonzero coefficient.)
+
+So, if we express whole space as \(\mathcal{H}=span\{e_1,e_2,...,e_j,...\}\), then
+we can also re-express $\mathcal{H}$ as \(\mathcal{H}=span\{e_1,e_2,...,f_j,...\}\).
+Then for each $j$, we replace $e_j$ to $f_j$ inductively from $j=1$ to $\infty$ for above span expression.
+Then consquently we get \(\mathcal{H}=span\{f_1,f_2,...,f_j,...\}\) for $\{f_j, j\geq 1\}$, it's what we want.
+
+
+
 
 \subsection{Problem 10}
 \textbf{
@@ -75,24 +108,24 @@ and since $\Phi$ are Hilbert-Schmidt, there are adjoint operator  $\Phi^*$.
 Using these facts,
 \[\sum_{i=1}^{\infty} <\Psi(f_i), \Phi(f_i)>
 = \sum_{i=1}^{\infty} <\Phi^*\Psi(f_i), f_i> 
-= \sum_{i=1}^\infty <\Phi^*\Psi\sum_{j=1}^\infty (f_i,e_j)e_j, \sum_{k=1}^\infty (f_k,e_k)e_j>\]
+= \sum_{i=1}^\infty <\Phi^*\Psi\sum_{j=1}^\infty <f_i,e_j>e_j, \sum_{k=1}^\infty <f_i,e_k>e_j>\]
 then
-\[=\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j>\bar{<f_i,e_k>}<\Phi^*\Psi(e_j),e_k>
+\[=\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j>\overline{<f_i,e_k>}<\Phi^*\Psi(e_j),e_k>
 =\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j><e_k,f_i><\Phi^*\Psi(e_j),e_k>\]
 then when $j\neq k$, the term becomes 0.(why?)
-so, only $j=k$ cases remain, so we rewrite above equation as
+so, only $j=k$ cases remain, and we rewrite above equation as
 \[=\sum_{i=1}\sum_{j=1} <f_i,e_j><e_j,f_i><\Phi^*\Psi(e_j),e_j>\]
-Since the operaters are Hilbert-Schmidt, the value of absolute summation is bounded,
+Since the operaters are Hilbert-Schmidt, the value of absolute summation is bounded
 and we can interchange the summation order. then
 \[=\sum_{j=1}\sum_{i=1} <f_i,e_j><e_j,f_i><\Phi^*\Psi(e_j),e_j>
 =\sum_{j=1}\sum_{i=1}|<f_i,e_j>|^2<\Phi^*\Psi(e_j),e_j>\]
-\[=\sum_{j=1} <\Phi^*\Psi(e_j),e_j>
+\[=\sum_{j=1} ||e_j||^2<\Phi^*\Psi(e_j),e_j>
 =\sum_{j=1} <\Phi^*\Psi(e_j),e_j>
 \]
-$\sum_{i=1}|<f_i,e_j>|^2 = 1$ since it coincide the definition of norm square, 
-and each element is in orthornormal set.
+At last part, I use the relation that $||e_j||^2=\sum_{i=1}|<f_i,e_j>|^2 = 1$  
+from the assumption that $\{f_i\}$ is in orthornormal set.
 \[=\sum_{j=1} <\Psi(e_j),\Phi(e_j)>
-    \]
+\]
 
 
 
@@ -104,5 +137,29 @@ and each element is in orthornormal set.
     \]
 }
 
+Firstly, I construct a lemma.
+\[||L||_{\mathcal{L}} = \sup\{|<Lx,y>|:||x||\leq 1, ||y||\leq 1\}\]
+For proof, (1) $\geq$ direction is simple consquence of Cauchy-Schwartz inequality.
+\(|<Lx,y>|\leq ||Lx||||y|| \leq ||Lx||\) for $||x||\leq 1$. Take supremum(within $||x||\leq 1$) both side.
+(2) To get $\leq$ direction, for $x\in \mathcal{H}, ||x||\leq 1$,
+let $x'=x/||x||, y'=Lx/||Lx||$. Then if $\sup|<Lx,y>|= M$ for some $M\in\mathcal{R}$, then $|<Lx',y'>|\leq M$ by assumption, and observe that
+\(|<Lx',y'>|=|<\frac{Lx}{||x||},\frac{Lx}{||Lx||}>=\frac{||Lx||^2}{||x||||Lx||}=\frac{||Lx||}{||x||}\), so
+$||Lx||\leq M||x||$. Take supremum(within $||x||\leq 1$) both side.
 
+Note that the argument which gives supremum value always satisfies $||x||=1$.
+
+Let's start our main goal.
+Let $x\in \mathcal{H} \text{ such that } ||x||\leq 1$, be argument of realizing supremum of definition of operator norm, \(||L||_{L}=||Lx||\))
+
+For boundedness and first identity, consider
+\[||L||_\mathcal{{L}}=\sup\{|<Lx, y>| : :||x||\leq 1, ||y||\leq 1\}\]
+\[=\sup\{|<x, L^*y>| : :||x||\leq 1, ||y||\leq 1\} = ||L^*||\]
+So if $L$ is bounded($||L||_\mathcal{L}<\infty$), then $L^*$ is also bounded($||L^*||_\mathcal{L}<\infty$).
+
+For second identity, consider
+\[||L||_\mathcal{{L}}=\sup\{|<Lx, Ly/||Ly||>| :||x||\leq 1, ||y||\leq 1\}\]
+\[=\sup\{|\frac{<L^*Lx, y>}{\overline{||Ly||}}| : ||x||\leq 1, ||y||\leq 1\}\]
+\[=\frac{1}{||L||_{\mathcal{L}}}\sup\{|<L^*Lx, y>| : ||x||\leq 1, ||y||\leq 1\}=\frac{||L^*L||_{\mathcal{L}}}{||L||_{\mathcal{L}}}\]
+At third line, I use the definition of operater norm. Multiply $||L||_{\mathcal{L}}$ both side.
 \end{document}
+
