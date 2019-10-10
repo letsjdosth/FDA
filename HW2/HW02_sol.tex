@@ -2,6 +2,7 @@
 \usepackage{amsmath,amssymb,setspace,verbatim,graphicx,enumerate,enumitem}
 \usepackage[top=1in,bottom=1in,left=1in,right=1in,nohead,nofoot]{geometry}
 \usepackage{caption}
+\usepackage{mathtools}
 % \usepackage{subcaption}
 % \usepackage{subfig}
 % \usepackage{subfloat}
@@ -161,5 +162,30 @@ For second identity, consider
 \[=\sup\{|\frac{<L^*Lx, y>}{\overline{||Ly||}}| : ||x||\leq 1, ||y||\leq 1\}\]
 \[=\frac{1}{||L||_{\mathcal{L}}}\sup\{|<L^*Lx, y>| : ||x||\leq 1, ||y||\leq 1\}=\frac{||L^*L||_{\mathcal{L}}}{||L||_{\mathcal{L}}}\]
 At third line, I use the definition of operater norm. Multiply $||L||_{\mathcal{L}}$ both side.
+
+\section{Chapter 11}
+\subsection{Problem 5}
+\textbf{
+    Suppose for each $k=1,2,...,M$, $Y_{k,n}, Y_k$ are random variables such that for every $M\geq 1$,
+    \[ [Y_{1,n},Y_{2,n},...,Y_{M,n}]^T\xrightarrow{d} [Y_1,Y_2,...,Y_M]^T\]
+    in the Euclidean space $\mathcal{R}^M$. Suppose $\{w_k, k\geq 1\}$ is a sequence of numbers such that
+    \[\sum_{k=1}^{\infty}w_k E(|Y_k|)<\infty \text{ and } \sum_{k=1}^{\infty}|w_k|\sup_{n\geq 1}E|Y_{k,n}-Y_k|<\infty\]
+    Using Theorem 11.1.3, show that \(\sum_{k=1}^{\infty}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_k\).
+}
+
+\subsection{Problem 9}
+\textbf{
+    Suppose $\mathcal{H}$ is an infinite dimensional separable Hilbert space and $\{e_j,j\geq1\}$ is an orthonormal system.
+    Define the operator $\Psi$ by
+    \[\Psi(x)=\sum_{j=1}^{\infty}j^{-1}<x,e_j>e_j\].
+    Show that $\Psi$ is bounded, symmetric and nonnegative definite, but it is not a covariance operator.
+}
+
+\subsection{Problem 14}
+\textbf{
+    Suppose X satisfies Definition 11.3.2 and let L be a bounded operator. 
+    Show that $L(X)$ is Gausian; find its expected value and covariance operator.
+}
+
 \end{document}
 
