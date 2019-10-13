@@ -105,7 +105,7 @@ Then consquently we get \(\mathcal{H}=span\{f_1,f_2,...,f_j,...\}\) for $\{f_j, 
 }
 
 Firstly note that $f_i=\sum_{j=1}^\infty<f_i,e_j>e_j$, 
-and since $\Phi$ are Hilbert-Schmidt, there are adjoint operator  $\Phi^*$.
+and since $\Phi$ are Hilbert-Schmidt, there exists adjoint operator  $\Phi^*$.
 Using these facts,
 \[\sum_{i=1}^{\infty} <\Psi(f_i), \Phi(f_i)>
 = \sum_{i=1}^{\infty} <\Phi^*\Psi(f_i), f_i> 
@@ -113,20 +113,20 @@ Using these facts,
 then
 \[=\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j>\overline{<f_i,e_k>}<\Phi^*\Psi(e_j),e_k>
 =\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j><e_k,f_i><\Phi^*\Psi(e_j),e_k>\]
-then when $j\neq k$, the term becomes 0.(why?)
-so, only $j=k$ cases remain, and we rewrite above equation as
-\[=\sum_{i=1}\sum_{j=1} <f_i,e_j><e_j,f_i><\Phi^*\Psi(e_j),e_j>\]
 Since the operaters are Hilbert-Schmidt, the value of absolute summation is bounded
 and we can interchange the summation order. then
-\[=\sum_{j=1}\sum_{i=1} <f_i,e_j><e_j,f_i><\Phi^*\Psi(e_j),e_j>
-=\sum_{j=1}\sum_{i=1}|<f_i,e_j>|^2<\Phi^*\Psi(e_j),e_j>\]
-\[=\sum_{j=1} ||e_j||^2<\Phi^*\Psi(e_j),e_j>
-=\sum_{j=1} <\Phi^*\Psi(e_j),e_j>
-\]
-At last part, I use the relation that $||e_j||^2=\sum_{i=1}|<f_i,e_j>|^2 = 1$  
+\[=\sum_{j=1}\sum_{k=1}<\Phi^*\Psi(e_j),e_j>(\sum_{i=1}<f_i,e_j><e_k,f_i>)\]
+If we think the linear operator $L:\mathcal{H}\rightarrow\mathcal{H}$ such that
+maps each $f_i$ to $e_i$, then since both $\{f_i\}, \{e_i\}$ are orthonormal, 
+$LL^*=L^*L$ is identity operator.
+It means that, for $j\neq k$, the last summation term becomes 0,
+and for only $j=k$ cases remain with value 1 because of using orthonormal set.
+
+So we rewrite above equation as
+\[=\sum_{j=1} <\Phi^*\Psi(e_j),e_j>
+=\sum_{j=1} <\Psi(e_j),\Phi(e_j)>\]
 from the assumption that $\{f_i\}$ is in orthornormal set.
-\[=\sum_{j=1} <\Psi(e_j),\Phi(e_j)>
-\]
+
 
 
 
@@ -163,29 +163,91 @@ For second identity, consider
 \[=\frac{1}{||L||_{\mathcal{L}}}\sup\{|<L^*Lx, y>| : ||x||\leq 1, ||y||\leq 1\}=\frac{||L^*L||_{\mathcal{L}}}{||L||_{\mathcal{L}}}\]
 At third line, I use the definition of operater norm. Multiply $||L||_{\mathcal{L}}$ both side.
 
+\newpage
 \section{Chapter 11}
 \subsection{Problem 5}
 \textbf{
     Suppose for each $k=1,2,...,M$, $Y_{k,n}, Y_k$ are random variables such that for every $M\geq 1$,
     \[ [Y_{1,n},Y_{2,n},...,Y_{M,n}]^T\xrightarrow{d} [Y_1,Y_2,...,Y_M]^T\]
     in the Euclidean space $\mathcal{R}^M$. Suppose $\{w_k, k\geq 1\}$ is a sequence of numbers such that
-    \[\sum_{k=1}^{\infty}w_k E(|Y_k|)<\infty \text{ and } \sum_{k=1}^{\infty}|w_k|\sup_{n\geq 1}E|Y_{k,n}-Y_k|<\infty\]
+    \[\sum_{k=1}^{\infty}|w_k| E(|Y_k|)<\infty \text{ and } \sum_{k=1}^{\infty}|w_k|\sup_{n\geq 1}E|Y_{k,n}-Y_k|<\infty\]
     Using Theorem 11.1.3, show that \(\sum_{k=1}^{\infty}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_k\).
 }
+
+To more easily show to a method of using the theorem 11.1.3, 
+I will start to match our case to the notation of the theorem's assumption on the book. \\
+our case $\leftrightarrow$ theorem11.1.3 \\
+\(\sum_{k=1}^{u}w_kY_{k,n} \leftrightarrow X_n(u) \) \\
+\(\sum_{k=1}^{u}w_kY_{k} \leftrightarrow X(u) \) \\
+\(\sum_{k=1}^{\infty}w_kY_{k,n} \leftrightarrow X_n \) \\
+\(\sum_{k=1}^{\infty}w_kY_{k} \leftrightarrow X \) \\
+
+More formally, since \([Y_{1,n},Y_{2,n},...,Y_{M,n}]^T\xrightarrow{d} [Y_1,Y_2,...,Y_M]^T\) for every $M\geq1$ and
+$w_k$s are just real number,
+if we momently fix $M$ as $u$, we get \(\sum_{k=1}^{u}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{u}w_kY_{k}\).
+and by letting $u$ increase (to $\infty$), we also get 
+\(\sum_{k=1}^{u}w_kY_{k}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_{k}\).
+Note that the last term's convergence is guaranteed by our problem's assumption, \(\sum_{k=1}^{\infty}|w_k| E(|Y_k|)<\infty\).
+Nextly, from our problem's assumption $\sum_{k=1}^{\infty}|w_k|\sup_{n\geq 1}E|Y_{k,n}-Y_k|<\infty$,
+\[\sup_{n\geq 1}E|w_kY_{k,n}-w_kY_k|\rightarrow0 \text{ as } k\rightarrow\infty \]
+It directly implies
+\[\lim_{u\rightarrow\infty}\limsup_{n\rightarrow\infty}P(d(\sum_{k=1}^{u}w_kY_{k,n},\sum_{k=1}^{\infty}w_kY_{k,n})>\epsilon)=0\]
+So theorem 11.1.3's condition are all set. By applying the theorem, we get
+\(\sum_{k=1}^{\infty}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_k\).
 
 \subsection{Problem 9}
 \textbf{
     Suppose $\mathcal{H}$ is an infinite dimensional separable Hilbert space and $\{e_j,j\geq1\}$ is an orthonormal system.
     Define the operator $\Psi$ by
-    \[\Psi(x)=\sum_{j=1}^{\infty}j^{-1}<x,e_j>e_j\].
+    \[\Psi(x)=\sum_{j=1}^{\infty}j^{-1}<x,e_j>e_j\]
     Show that $\Psi$ is bounded, symmetric and nonnegative definite, but it is not a covariance operator.
 }
+
+Boundness is straightforward. For reach the supremum of a definition of operator norm,
+we should choose simply $e_1$ because $j^-1$ decreases as $j$ goes to $\infty$,
+and we can get $||\Psi||=1<\infty$.
+
+Next, since $\Psi$ is clearly linear and bounded as we showed, there exist adjoint $||\Psi^*||$.
+Then, since $j$ has no imaginary part,
+\[<\Psi(x),y>=<\sum_{j=1}^{\infty}j^{-1}<x,e_j>e_j,y>
+=\sum_{j=1}^{\infty}j^{-1}<<x,e_j>e_j,<y,e_j>e_j>\]
+\[=\sum_{j=1}^{\infty}<<x,e_j>e_j,j^{-1}<y,e_j>e_j>
+=\sum_{j=1}^{\infty}<x,j^{-1}<y,e_j>e_j>
+=\sum_{j=1}^{\infty}<x,\Psi(y)>\]
+So $\Psi=\Psi^*$, and it means that $\Psi$ is symmetric operator.
+
+To show $\Psi$ is nonnegative,
+\[<\Psi(x),x>=\sum_{j=1}^{\infty}j^{-1}<<x,e_j>e_j,x>\]
+and $j^{-1}>0, <x,x>\geq0$. (In fact, positive operator is also symmetric in Hilbert space.)
+
+But, $\Psi$ is not Hilbert-Schmidt, nor covariance operator. Consider below.
+Since $\Psi$ is symmetric, we can apply spectral theorem to $\Psi$.
+For simplicity for our discussion, WLOG(because Hilbert-Schmidt norm is basis-invariant) 
+choose $\{e_j\}$ as eigenvector(or correspond some eigen-element consisting $\mathcal{H}$) of $\Psi$.
+then, naturally $\{j^{-1}\}$ become eigenvalues. And when $\mathcal{S}$ is set of Hilbert-Schmidt operator of $\mathcal{H}$,
+\[||\Psi||_{\mathcal{S}}^{2}=\sum_{j=1}^{\infty}(j^{-1})^2=\infty\]
+so $\Psi\notin\mathcal{S}$.
+
+
 
 \subsection{Problem 14}
 \textbf{
     Suppose X satisfies Definition 11.3.2 and let L be a bounded operator. 
     Show that $L(X)$ is Gausian; find its expected value and covariance operator.
 }
+
+Maybe in the problem, a condition '$L$ is linear map from $\mathcal{H}$ to $\mathcal{H}$' is missed. I'll assume it.
+
+Firstly, since $L$ is bounded linear operator, there exists an adjoint operator $L^*$.
+Then, let's consider the characteristic functional of $L(X)$. 
+For $y\in\mathcal{H}$,
+\[\phi_{L(X)}(y)=Eexp\{i<y,LX>\}=Eexp\{i<L^*y,X>\}=\phi_X(L^*y)\]
+So, $X$ follows Gaussian(definition 11.3.2),
+\[\phi_{L(X)}(y)=\phi_X(L^*y)=exp\{i<\mu,L^*y>-\frac{1}{2}<C(L^*y),L^*y>\}
+=exp\{i<L\mu,y>-\frac{1}{2}<LC(L^*y),y>\}\]
+From above form of characteristic functional of $L(X)$, we can observe that $L(X)$ follows Gaussian again, with
+mean function $L\mu$, covariance operater $LCL^*$.
+
 
 \end{document}
 
