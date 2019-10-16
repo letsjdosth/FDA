@@ -50,10 +50,10 @@ For $x\in\mathcal{H}$, consider below relation.
 \[|<x, f_n>-<x,f>|^2 = |<x, f_n-f>|^2 \leq ||x||^2||f_n-f||^2\]
 Last inequality comse from Cauchy-Schwartz inequality. Then when $n\rightarrow\infty$, by our setting $||f_n-f||\rightarrow0$, so
 \[lim_{n\rightarrow\infty}|<x, f_n>-<x,f>|^2\leq 0\]
-Then
+Then, since square term has always nonnegative value,
 \[lim_{n\rightarrow\infty}<x, f_n>-<x,f>= 0\]
-Thus, \(lim_{n\rightarrow\infty}<x, f_n> = <x,f>\) and the inner product operator is preserve the limit.
-It is equivalent statement that inner product operator is continuous.
+Thus \(lim_{n\rightarrow\infty}<x, f_n> = <x,f>\). From this, we show that the inner product operator preserves the limit.
+It is equivalent statement to that inner product operator is continuous.
 
 
 \subsection{Problem 6}
@@ -65,34 +65,34 @@ It is equivalent statement that inner product operator is continuous.
 }
 
 Firstly, I claim that $e_j$ and $f_j$ are not orthorgonal. \\
-Consider a simple case that only one component of fixed $j$ index are different $e_j$ from $f_j$. then,
-If $e_j, f_j$ are orthonormal, the by Pythagorean theorem, $||e_j-f_j||^2=||e_j||^2+||f_j||^2=1+1=2$
-since $e_j$ and $f_j$ are unit elements. But under our assumption
+Consider a simple case that only one component of fixed $j$ index is different $e_j$ from $f_j$. then,
+If $e_j, f_j$ are orthogonal, by the Pythagorean theorem, $||e_j-f_j||^2=||e_j||^2+||f_j||^2=1+1=2$
+since $e_j$ and $f_j$ are unit elements. But under our assumption, $||e_j-f_j||^2$ cannot reach the value 2.
+
+More formally,
 \[||e_j-f_j||^2=<e_j-f_j, e_j-f_j>=<e_j, e_j>-<e_j,f_j>-<f_j,e_j>+<f_j,f_j>\]
 \[=||e_j||^2+||f_j||^2-(<e_j,f_j>+<f_j,e_j>) = 2-(<e_j,f_j>+<f_j,e_j>) < 1\]
-so in our case, $||e_j-f_j||^2$ always cannot have the value 2, and 
+so
 \[<e_j,f_j>+<f_j,e_j>=<e_j,f_j>+\overline{<e_j,f_j>}=2Re(<e_j,f_j>)\] cannot become 0,
-neither can $<e_j,f_j>$.
-Both viewing norm value and inner product value show that they are not orthogonal.
-Thus the claim is proved for simple case.
+neither can $<e_j,f_j>$, so they are not orthogonal. Thus the claim is proved for simple case.
 
-Next, consider many j-th components can be different $e_j$ from $f_j$. But above claim still holds, because
+Next, consider many j-th components are different $e_j$ from $f_j$. But above claim still holds, because
 \(\sum_{j=1}^\infty ||e_j-f_j||^2<1\) and all norm values must be nonnegative,
-none of j-th component of $||e_j-f_j||$ can be greater then 1 like the simple case, 
-and $<e_j,f_j>+<f_j,e_j>=2Re(<e_j,f_j>)$ cannot be 0 for all $j$.
-So above claim is proved for whole case.
+none of j-th component of $||e_j-f_j||$ can be greater then 1 like the simple cases. 
+It means that $<e_j,f_j>+<f_j,e_j>=2Re(<e_j,f_j>)$ cannot be 0 for all $j$.
+So above claim is proved for whole cases.
 
 
-Then from the result of claim, if we express $f_j$ as the linear combination of $\{e_i\}$, 
-then $f_j$ always has $e_j$ component with nonzero coefficient.
-(More precisely, use Gram-Schmidt process, or just project $f_j$ onto $e_j$.
-then since $f_j$ is not orthogonal to $e_j$, by property of separable Hilbert space's orthonormal basis,
-we get $e_j$ component of nonzero coefficient.)
+Then as what we get from above claim, if we express $f_j$ as the linear combination of $\{e_i\}$, 
+$f_j$ always has $e_j$ component term with nonzero coefficient.
+(More precisely, use Gram-Schmidt process, or just project $f_j$ onto $e_j$ orthogonally.
+Then because $f_j$ is not orthogonal to $e_j$,
+we get $e_j$ component term of nonzero coefficient in $f_j$'s expression of linear combination using $\{e_i\}$.)
 
-So, if we express whole space as \(\mathcal{H}=span\{e_1,e_2,...,e_j,...\}\), then
+So, if we express whole space $\mathcal{H}$ as \(\mathcal{H}=span\{e_1,e_2,...,e_j,...\}\), then
 we can also re-express $\mathcal{H}$ as \(\mathcal{H}=span\{e_1,e_2,...,f_j,...\}\).
 Then for each $j$, we replace $e_j$ to $f_j$ inductively from $j=1$ to $\infty$ for above span expression.
-Then consquently we get \(\mathcal{H}=span\{f_1,f_2,...,f_j,...\}\) for $\{f_j, j\geq 1\}$, it's what we want.
+Then as a result we get \(\mathcal{H}=span\{f_1,f_2,...,f_j,...\}\) for $\{f_j, j\geq 1\}$, it's what we want.
 
 
 
@@ -113,16 +113,17 @@ Using these facts,
 then
 \[=\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j>\overline{<f_i,e_k>}<\Phi^*\Psi(e_j),e_k>
 =\sum _{i=1}\sum_{j=1}\sum_{k=1}<f_i,e_j><e_k,f_i><\Phi^*\Psi(e_j),e_k>\]
-Since the operaters are Hilbert-Schmidt, the value of absolute summation is bounded
+Since the operator $\Phi^*\Psi$ is also Hilbert-Schmidt, the value of absolute summation
+\(\sum _{i=1}\sum_{j=1}\sum_{k=1}|<f_i,e_j><e_k,f_i><\Phi^*\Psi(e_j),e_k>|<\infty\)
 and we can interchange the summation order. then
 \[=\sum_{j=1}\sum_{k=1}<\Phi^*\Psi(e_j),e_j>(\sum_{i=1}<f_i,e_j><e_k,f_i>)\]
 If we think the linear operator $L:\mathcal{H}\rightarrow\mathcal{H}$ such that
 maps each $f_i$ to $e_i$, then since both $\{f_i\}, \{e_i\}$ are orthonormal, 
 $LL^*=L^*L$ is identity operator.
-It means that, for $j\neq k$, the last summation term becomes 0,
+It means that, for $j\neq k$, the last summation's term (with $i$) becomes 0,
 and for only $j=k$ cases remain with value 1 because of using orthonormal set.
 
-So we rewrite above equation as
+So we rewrite above equation (with $j=k$, using only 1 summation symbol) as
 \[=\sum_{j=1} <\Phi^*\Psi(e_j),e_j>
 =\sum_{j=1} <\Psi(e_j),\Phi(e_j)>\]
 from the assumption that $\{f_i\}$ is in orthornormal set.
@@ -140,28 +141,29 @@ from the assumption that $\{f_i\}$ is in orthornormal set.
 
 Firstly, I construct a lemma.
 \[||L||_{\mathcal{L}} = \sup\{|<Lx,y>|:||x||\leq 1, ||y||\leq 1\}\]
-For proof, (1) $\geq$ direction is simple consquence of Cauchy-Schwartz inequality.
+For proof of the lemma, (1) $\geq$ direction is simple consquence of Cauchy-Schwartz inequality.
 \(|<Lx,y>|\leq ||Lx||||y|| \leq ||Lx||\) for $||x||\leq 1$. Take supremum(within $||x||\leq 1$) both side.
-(2) To get $\leq$ direction, for $x\in \mathcal{H}, ||x||\leq 1$,
+(2) To get $\leq$ direction, for $x\in \mathcal{H} \text{ s.t.} ||x||\leq 1$,
 let $x'=x/||x||, y'=Lx/||Lx||$. Then if $\sup|<Lx,y>|= M$ for some $M\in\mathcal{R}$, then $|<Lx',y'>|\leq M$ by assumption, and observe that
 \(|<Lx',y'>|=|<\frac{Lx}{||x||},\frac{Lx}{||Lx||}>=\frac{||Lx||^2}{||x||||Lx||}=\frac{||Lx||}{||x||}\), so
-$||Lx||\leq M||x||$. Take supremum(within $||x||\leq 1$) both side.
-
-Note that the argument which gives supremum value always satisfies $||x||=1$.
+$||Lx||\leq M||x||$. Take supremum(within $||x||\leq 1$) both side. Note that the argument which gives supremum value always satisfies $||x||=1$.
 
 Let's start our main goal.
-Let $x\in \mathcal{H} \text{ such that } ||x||\leq 1$, be argument of realizing supremum of definition of operator norm, \(||L||_{L}=||Lx||\))
 
 For boundedness and first identity, consider
-\[||L||_\mathcal{{L}}=\sup\{|<Lx, y>| : :||x||\leq 1, ||y||\leq 1\}\]
-\[=\sup\{|<x, L^*y>| : :||x||\leq 1, ||y||\leq 1\} = ||L^*||\]
+\[||L||_\mathcal{{L}}=\sup\{|<Lx, y>| :||x||\leq 1, ||y||\leq 1\}\]
+\[=\sup\{|<x, L^*y>| :||x||\leq 1, ||y||\leq 1\} = ||L^*||\]
 So if $L$ is bounded($||L||_\mathcal{L}<\infty$), then $L^*$ is also bounded($||L^*||_\mathcal{L}<\infty$).
 
-For second identity, consider
-\[||L||_\mathcal{{L}}=\sup\{|<Lx, Ly/||Ly||>| :||x||\leq 1, ||y||\leq 1\}\]
-\[=\sup\{|\frac{<L^*Lx, y>}{\overline{||Ly||}}| : ||x||\leq 1, ||y||\leq 1\}\]
-\[=\frac{1}{||L||_{\mathcal{L}}}\sup\{|<L^*Lx, y>| : ||x||\leq 1, ||y||\leq 1\}=\frac{||L^*L||_{\mathcal{L}}}{||L||_{\mathcal{L}}}\]
-At third line, I use the definition of operater norm. Multiply $||L||_{\mathcal{L}}$ both side.
+For second identity, 
+let $x\in \mathcal{H} \text{ such that } ||x||\leq 1$, be argument of realizing supremum of definition of operator norm, \(||L||_{L}=||Lx||\).
+then consider
+\[||L||_\mathcal{{L}}=\sup\{|<Lx/||Lx||, Ly>| : ||y||\leq 1\}\]
+\[=\sup\{|\frac{<x, L^*Ly>}{{||Lx||}}| : ||y||\leq 1\}\]
+\[=\frac{1}{||L||_{\mathcal{L}}}\sup\{|<x, L^*Ly>| : ||y||\leq 1\}=\frac{||L^*L||_{\mathcal{L}}}{||L||_{\mathcal{L}}}\]
+Note that, by our assumption over $x$, the supremum would be realized at $y=x$. So if $||x||\leq1$ is omitted on condition of supremum like above expression, it does not become problem.
+
+Then, Multiply $||L||_{\mathcal{L}}$ both side.
 
 \newpage
 \section{Chapter 11}
@@ -174,7 +176,7 @@ At third line, I use the definition of operater norm. Multiply $||L||_{\mathcal{
     Using Theorem 11.1.3, show that \(\sum_{k=1}^{\infty}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_k\).
 }
 
-To more easily show to a method of using the theorem 11.1.3, 
+To overview my procedure solving this problem easier to reader, especially the form of using the theorem 11.1.3, 
 I will start to match our case to the notation of the theorem's assumption on the book. \\
 our case $\leftrightarrow$ theorem11.1.3 \\
 \(\sum_{k=1}^{u}w_kY_{k,n} \leftrightarrow X_n(u) \) \\
@@ -183,16 +185,17 @@ our case $\leftrightarrow$ theorem11.1.3 \\
 \(\sum_{k=1}^{\infty}w_kY_{k} \leftrightarrow X \) \\
 
 More formally, since \([Y_{1,n},Y_{2,n},...,Y_{M,n}]^T\xrightarrow{d} [Y_1,Y_2,...,Y_M]^T\) for every $M\geq1$ and
-$w_k$s are just real number,
-if we momently fix $M$ as $u$, we get \(\sum_{k=1}^{u}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{u}w_kY_{k}\).
-and by letting $u$ increase (to $\infty$), we also get 
+$\{w_k\}$ are just real number,
+if I momently fix $M$ as $u$, I can get a condition that \(\sum_{k=1}^{u}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{u}w_kY_{k}\).
+and by letting $u$ increase to $\infty$, also can get 
 \(\sum_{k=1}^{u}w_kY_{k}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_{k}\).
 Note that the last term's convergence is guaranteed by our problem's assumption, \(\sum_{k=1}^{\infty}|w_k| E(|Y_k|)<\infty\).
-Nextly, from our problem's assumption $\sum_{k=1}^{\infty}|w_k|\sup_{n\geq 1}E|Y_{k,n}-Y_k|<\infty$,
+Nextly, from our problem's another assumption $\sum_{k=1}^{\infty}|w_k|\sup_{n\geq 1}E|Y_{k,n}-Y_k|<\infty$,
 \[\sup_{n\geq 1}E|w_kY_{k,n}-w_kY_k|\rightarrow0 \text{ as } k\rightarrow\infty \]
-It directly implies
+Since it converges to the constant, it directly implies some analogues without E - in this case a thing of integral operator - and with measure sense.
+If I write concretely,
 \[\lim_{u\rightarrow\infty}\limsup_{n\rightarrow\infty}P(d(\sum_{k=1}^{u}w_kY_{k,n},\sum_{k=1}^{\infty}w_kY_{k,n})>\epsilon)=0\]
-So theorem 11.1.3's condition are all set. By applying the theorem, we get
+So theorem 11.1.3's condition are all set. Let's apply the theorem! Then we get
 \(\sum_{k=1}^{\infty}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_k\).
 
 \subsection{Problem 9}
@@ -203,12 +206,12 @@ So theorem 11.1.3's condition are all set. By applying the theorem, we get
     Show that $\Psi$ is bounded, symmetric and nonnegative definite, but it is not a covariance operator.
 }
 
-Boundness is straightforward. For reach the supremum of a definition of operator norm,
-we should choose simply $e_1$ because $j^-1$ decreases as $j$ goes to $\infty$,
-and we can get $||\Psi||=1<\infty$.
+Boundness is straightforward. To reach the supremum of a definition of operator norm(of $\mathcal{H}$),
+we should choose simply $e_1$ because $j^{-1}$ decreases as $j$ goes to $\infty$.
+And we can get $||\Psi||=1<\infty$ incidently from the form of $\Psi$.
 
-Next, since $\Psi$ is clearly linear and bounded as we showed, there exist adjoint $||\Psi^*||$.
-Then, since $j$ has no imaginary part,
+Next, since $\Psi$ is clearly linear and bounded as we showed, there exists an adjoint $||\Psi^*||$.
+Then, with the fact that $j$ has no imaginary part,
 \[<\Psi(x),y>=<\sum_{j=1}^{\infty}j^{-1}<x,e_j>e_j,y>
 =\sum_{j=1}^{\infty}j^{-1}<<x,e_j>e_j,<y,e_j>e_j>\]
 \[=\sum_{j=1}^{\infty}<<x,e_j>e_j,j^{-1}<y,e_j>e_j>
@@ -218,13 +221,14 @@ So $\Psi=\Psi^*$, and it means that $\Psi$ is symmetric operator.
 
 To show $\Psi$ is nonnegative,
 \[<\Psi(x),x>=\sum_{j=1}^{\infty}j^{-1}<<x,e_j>e_j,x>\]
-and $j^{-1}>0, <x,x>\geq0$. (In fact, positive operator is also symmetric in Hilbert space.)
+and just note that $j^{-1}>0, <x,x>\geq0$ for all $x$. (In fact, positive operator is also symmetric in Hilbert space.)
 
-But, $\Psi$ is not Hilbert-Schmidt, nor covariance operator. Consider below.
+But, $\Psi$ is not Hilbert-Schmidt, nor covariance operator. For seeing the reason, consider below.
+
 Since $\Psi$ is symmetric, we can apply spectral theorem to $\Psi$.
-For simplicity for our discussion, WLOG(because Hilbert-Schmidt norm is basis-invariant) 
-choose $\{e_j\}$ as eigenvector(or correspond some eigen-element consisting $\mathcal{H}$) of $\Psi$.
-then, naturally $\{j^{-1}\}$ become eigenvalues. And when $\mathcal{S}$ is set of Hilbert-Schmidt operator of $\mathcal{H}$,
+For simplicity for our discussion, Without loss of generality(because Hilbert-Schmidt norm is basis-invariant) 
+choose the original basis of $\mathcal{H}, \{e_j\}$ to coincide to eigenvector(or eigenfunctions, etc. corresponded some eigen-element type consisting $\mathcal{H}$) of $\Psi$.
+then, naturally $\{j^{-1}\}$ become eigenvalues. And if we denote the set of Hilbert-Schmidt operator on $\mathcal{H}$ as $\mathcal{S}$,
 \[||\Psi||_{\mathcal{S}}^{2}=\sum_{j=1}^{\infty}(j^{-1})^2=\infty\]
 so $\Psi\notin\mathcal{S}$.
 
@@ -236,17 +240,17 @@ so $\Psi\notin\mathcal{S}$.
     Show that $L(X)$ is Gausian; find its expected value and covariance operator.
 }
 
-Maybe in the problem, a condition '$L$ is linear map from $\mathcal{H}$ to $\mathcal{H}$' is missed. I'll assume it.
+Maybe in the problem, a condition $L$ is linear map from $\mathcal{H}$ to $\mathcal{H}$' is missed. I'll assume it.
 
 Firstly, since $L$ is bounded linear operator, there exists an adjoint operator $L^*$.
 Then, let's consider the characteristic functional of $L(X)$. 
 For $y\in\mathcal{H}$,
 \[\phi_{L(X)}(y)=Eexp\{i<y,LX>\}=Eexp\{i<L^*y,X>\}=\phi_X(L^*y)\]
-So, $X$ follows Gaussian(definition 11.3.2),
+Then, since $X$ follows Gaussian by assumption(definition 11.3.2),
 \[\phi_{L(X)}(y)=\phi_X(L^*y)=exp\{i<\mu,L^*y>-\frac{1}{2}<C(L^*y),L^*y>\}
 =exp\{i<L\mu,y>-\frac{1}{2}<LC(L^*y),y>\}\]
 From above form of characteristic functional of $L(X)$, we can observe that $L(X)$ follows Gaussian again, with
-mean function $L\mu$, covariance operater $LCL^*$.
+mean function $L\mu$, covariance operator $LCL^*$.
 
 
 \end{document}
