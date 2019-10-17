@@ -117,10 +117,10 @@ Since the operator $\Phi^*\Psi$ is also Hilbert-Schmidt, the value of absolute s
 \(\sum _{i=1}\sum_{j=1}\sum_{k=1}|<f_i,e_j><e_k,f_i><\Phi^*\Psi(e_j),e_k>|<\infty\)
 and we can interchange the summation order. then
 \[=\sum_{j=1}\sum_{k=1}<\Phi^*\Psi(e_j),e_j>(\sum_{i=1}<f_i,e_j><e_k,f_i>)\]
-If we think the linear operator $L:\mathcal{H}\rightarrow\mathcal{H}$ such that
+If we think the (another) linear operator $L:\mathcal{H}\rightarrow\mathcal{H}$ such that
 maps each $f_i$ to $e_i$, then since both $\{f_i\}, \{e_i\}$ are orthonormal, 
 $LL^*=L^*L$ is identity operator.
-It means that, for $j\neq k$, the last summation's term (with $i$) becomes 0,
+It means that, for $j\neq k$, the \(\sum_j\sum_k\sum_i<f_i,e_j><e_k,f_i>\) terms become 0,
 and for only $j=k$ cases remain with value 1 because of using orthonormal set.
 
 So we rewrite above equation (with $j=k$, using only 1 summation symbol) as
@@ -130,7 +130,7 @@ from the assumption that $\{f_i\}$ is in orthornormal set.
 
 
 
-
+\newpage
 \subsection{Problem 12}
 \textbf{
     Show that if $L$ is bounded then $L^*$ is also bounded, and
@@ -161,7 +161,8 @@ then consider
 \[||L||_\mathcal{{L}}=\sup\{|<Lx/||Lx||, Ly>| : ||y||\leq 1\}\]
 \[=\sup\{|\frac{<x, L^*Ly>}{{||Lx||}}| : ||y||\leq 1\}\]
 \[=\frac{1}{||L||_{\mathcal{L}}}\sup\{|<x, L^*Ly>| : ||y||\leq 1\}=\frac{||L^*L||_{\mathcal{L}}}{||L||_{\mathcal{L}}}\]
-Note that, by our assumption over $x$, the supremum would be realized at $y=x$. So if $||x||\leq1$ is omitted on condition of supremum like above expression, it does not become problem.
+Note that, by our assumption over $x$, the supremum would be realized at $y=x$. 
+So I can omit $||x||\leq1$ on condition of supremum like above expression.
 
 Then, Multiply $||L||_{\mathcal{L}}$ both side.
 
@@ -190,14 +191,30 @@ if I momently fix $M$ as $u$, I can get a condition that \(\sum_{k=1}^{u}w_kY_{k
 and by letting $u$ increase to $\infty$, also can get 
 \(\sum_{k=1}^{u}w_kY_{k}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_{k}\).
 Note that the last term's convergence is guaranteed by our problem's assumption, \(\sum_{k=1}^{\infty}|w_k| E(|Y_k|)<\infty\).
+
 Nextly, from our problem's another assumption $\sum_{k=1}^{\infty}|w_k|\sup_{n\geq 1}E|Y_{k,n}-Y_k|<\infty$,
 \[\sup_{n\geq 1}E|w_kY_{k,n}-w_kY_k|\rightarrow0 \text{ as } k\rightarrow\infty \]
-Since it converges to the constant, it directly implies some analogues without E - in this case a thing of integral operator - and with measure sense.
-If I write concretely,
+Since it converges to the constant with integral operator E, 
+it implies that (with some assumption) an analogue of convergence holds in almost everywhere(almost surely) sense without E,
+\[\sup_{n\geq 1}|w_kY_{k,n}-w_kY_k| \rightarrow 0 \text{ almost everywhere as } k\rightarrow\infty \]
+(Some comment about this part: Because E is not just integral operator but some distribution-sense linear integral operator, 
+for getting above result it may need more assumption: 
+$Y_{k,n}$ and $Y_k$ have distributions of complete class or some restrictions like completeness-similar type for guaranteeing $X=0$ when $E(X)=0$.
+But, on the other view, now since we simultaneously deal with $\{w_k\}$, the non-random real number sequence satisfying this problem's assumptions,
+by considering what includes the case such that $w_k\rightarrow0$ fast enough (relatively to $E|Y_{k,n}|$), 
+it seems that the completeness type assumption's absence has no big problem. (but in this case, may need more assumption that make sure the relative convergence rate
+for which above boundednesses don't come from the case that $E|Y_n|\rightarrow0$.)
+Frankly whether does or does not this problem gives one of these assumptions (either one) already, I cannot sure.
+If not, I have should taken another way to get third condition of theorem 11.1.3.)
+
+For our next work, we only need to work in measure(probability) sense bound.
+So just ignoring zero-measure part, we can get from above result,
 \[\lim_{u\rightarrow\infty}\limsup_{n\rightarrow\infty}P(d(\sum_{k=1}^{u}w_kY_{k,n},\sum_{k=1}^{\infty}w_kY_{k,n})>\epsilon)=0\]
-So theorem 11.1.3's condition are all set. Let's apply the theorem! Then we get
+So, theorem 11.1.3's three conditions are all set. Let's apply the theorem! 
+Then as a result, we get
 \(\sum_{k=1}^{\infty}w_kY_{k,n}\xrightarrow{d}\sum_{k=1}^{\infty}w_kY_k\).
 
+\newpage
 \subsection{Problem 9}
 \textbf{
     Suppose $\mathcal{H}$ is an infinite dimensional separable Hilbert space and $\{e_j,j\geq1\}$ is an orthonormal system.
