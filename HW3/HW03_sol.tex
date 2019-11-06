@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,setspace,verbatim,graphicx,enumerate,enumitem}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in,nohead,nofoot]{geometry}
+\usepackage{caption}
+\usepackage{mathtools}
+% \usepackage{subcaption}
+% \usepackage{subfig}
+% \usepackage{subfloat}
+% \usepackage{tabularx}
+\usepackage{mdframed}
+
+\newenvironment{Rcode}% environment name 
+{%begin code
+    \begin{mdframed}
+    \#R code
+    \begin{small}
+}
+{%end code
+    \end{small}
+    \end{mdframed}
+}
+
+\newenvironment{console}% environment name 
+{%begin code
+    \begin{mdframed}
+    \#Console
+    \begin{small}
+}
+{%end code
+    \end{small}
+    \end{mdframed}
+}
+
+\begin{document}
+\title{FDA Homework 3}
+\author{Seokjun Choi}
+\date{November 8th, 2019}
+\maketitle
+
+\section{Chapter 12}
+\subsection{Problem 2}
+\textbf{
+Show that for every eigenvalue $\lambda$ of a bounded operator $L$,
+we have $|\lambda|\leq||L||_{\mathcal{L}}$.
+}
+
+In problem's statement, $L$ is being assumed that it can be spectral decomposable 
+(i.e. self-adjoint, compact(or, Hilbert-Schmidt) operator), so I will work with these assumptions.
+
+Firstly I claim that $||L||$ or $-||L||$ is eigenvalue of $L$.
+Without loss of generality, assume first case and denote $\lambda_1=||L||=\sup\{<Lf,f>:||f||=1\}$.
+Let $\{f_n\}\in\mathcal{H}$ such that $||f_n||=1$, $<Tf_n,f_n>\rightarrow\lambda_1$ 
+and $Tf_n\rightarrow g$ for some $g\in\mathcal{H}$.
+(such $\{f_n\},g$ exist because $L$ is compact and $\mathcal{H}$ is complete.)
+Then
+\[||Lf_n-\lambda_1 f_n||^2=||Lf_n||^2-2\lambda_1<Lf_n,f_n>+\lambda_1^2||f_n||^2\]
+\[\leq ||L||^2||f_n||^2-2\lambda_1<Lf_n,f_n>+\lambda_1^2||f_n||^2\]
+\[\leq \lambda_1^2-2\lambda_1<Lf_n,f_n>+\lambda_1^2\]
+\[\leq 2\lambda_1^2-2\lambda_1^2\rightarrow 0\]
+So $Lf_n\rightarrow g$, $\lambda_1 f_n\rightarrow g$, and under continuity of $L$ from the assumptions,
+we get $\lambda_1 g = Lg$. And we also verify $g\neq0$ because if 0, it becomes $\lambda_1=||L||=0$, contradiction.
+thus $\lambda_1$ is eigenvalue of $L$.
+(The proof for $||L||=-\lambda_1$ case is similar.)
+
+Next I claim one more thing that above $\lambda_1=\max{|\lambda|}$ over all $\lambda$s which are eigenvalues of $L$.
+Without loss of generality, consider only the case all eigenvalues of $L$ is nonnegative. 
+(if not, change sign of it and its pair eigenfunction together.)
+Assume the claim is false, then there are $\lambda^*$ and the pair eigenfuction $v^*$ whose norm is 1.
+Then, $Lv^*=\lambda^*>\lambda_1=||L||=\sup_{||v||=1}||Lv||$, we have contradiction.
+So, all eigenvalues of $L$ are smaller then $\lambda_1$, and it is what we want,
+$|\lambda|\leq||L||=\lambda_1$.
+
+
+
+
+\subsection{Problem 5}
+\textbf{
+Assume that $X_1,...,X_N$ are iid element of $L^2[0,1]$ with
+$E||X_n||^4<\infty$ and whose first $p$ eigenvalue are distinct.
+Prove that
+\[|N<\hat{v}_j-v_j,v_j>|=O_P(1) \text{ for } j=1,...,p\]
+Why is this a seemingly unusual convergence rate? 
+(Hint: \(|<\hat{v}_j-v_j,v_j>|=\frac{1}{2}||\hat{v}_j-v_j||\))
+}
+
+With hint of the problem, I'll show that
+\(N||\hat{v_j}-v_j||^2\) is bounded in probability sense, or $O_P(1)$.\\
+(constant $1/2$ does not matter in this context.)
+
+Then by theorem 12.2.1 on our book, under our assumptions, we know that
+\[\limsup_{N\rightarrow \infty} NE[||\hat{v}_j-v_j||^2]<C\]
+for some $C$ and $j=1,...,p$. 
+On other hand, by Chebyshev's inequality,
+\[Pr(N||(\hat{v_j}-v_j)||^2>\alpha)<\frac{NE[||\hat{v}_j-v_j||^2]}{\alpha}\]
+The result of above theorem says that right-hand side is bounded in probability sense for all $\alpha>0$.
+Then using definition of boundedness in probability to left-hand side,
+we get \(N||\hat{v_j}-v_j||^2\) is bounded in probability, which we want.
+
+
+
+\subsection{Problem 6}
+\textbf{
+Prove Theorem 12.1.3:
+Let $x,y\in\mathcal{H}$. Then
+\(||x\otimes y||_{\mathcal{H}\otimes\mathcal{H}}=
+||<y,.>x||_{\mathcal{S}}\)
+}
+
+When we view tensor as operator, \(x\otimes y(.)=<y,.>x\) holds. 
+Using this fact, when $\{e_i\}$ are orthonormal basis of $\mathcal{H}$,
+by the definition of Hilbert-Schmidt norm equipped on $\mathcal{S}$,
+\[||<y,.>x||^2_{\mathcal{S}}=\sum_{i=1}^{\infty}||(<y,z>x)e_i||^2 \text{ for } \forall z\in\mathcal{H}\]
+then by Parseval's identity,
+\[=||<y,z>x||^2_{\mathcal{H}} \text{ for } \forall z\in\mathcal{H}\]
+then by above fact and $z$ is arbitrary,
+\[=||x\otimes y||^2_{\mathcal{H}\otimes\mathcal{H}}\]
+
+
+\subsection{Problem 7}
+\textbf{
+Suppose that the data ${X_n(t):t\in[0,1], 1\leq n\leq N}$
+are expressed using an orthonormal basis $e_1,...,e_J$:
+\[X_n(t)=\sum_{j=1}^J x_{n_j}e_j(t)\]
+In this case, the EFPC's, $\hat{v}_i(t)$ can also be expressed as
+\[\hat{v}_i(t)=\sum_{j=1}^J \hat{v}_{ij}e_j(t)\]
+Explain how to obtain the coefficient $\hat{v}_{ij}$ from the $x_{nj}$. 
+Justify your answer.
+}
+
+I cannot ensure the intention of this problem.
+
+
+\subsection{Problem 12}
+\textbf{
+Under the same assumptions as in Problem 12.8.5,
+shows that, for $j\neq k$ and $1\leq j \leq p$,
+\[<\hat{v}_j-v_j, v_k>=\frac{<\hat{C}-C,\hat{v}_j \otimes v_k>}{\hat{\lambda}_j-\lambda_k}\]
+}
+
+By theorem 12.3.2 on our book, under our assumptions we know that 
+\[N^{1/2}(\hat{v}_j-v_j)=\sum_{i\neq j}\frac{1}{\lambda_j-\lambda_i}<\sqrt{N}(\hat{C}-C), v_i\otimes v_j>v_i+o_P(1)\]
+Take both side to $<., v_k>$ and neglect ignorable term, then
+\[N^{1/2}<\hat{v}_j-v_j,v_k>=\sum_{i\neq j}\frac{1}{\lambda_j-\lambda_i}<\sqrt{N}(\hat{C}-C), v_i\otimes v_j><v_i,v_k>\]
+then, the last inner product term becomes 1 only $i=k$, and otherwise 0. So we can rewrite it without summation symbol as 
+\[N^{1/2}<\hat{v}_j-v_j,v_k>=\frac{\sqrt{N}<(\hat{C}-C), v_k\otimes v_j>}{\lambda_j-\lambda_k}\]
+multiply $\sqrt{N}$ to both sides.
+And, because $\hat{\lambda}_j\rightarrow\lambda_j$ and $\hat{v}_j\rightarrow v_j$ as $N\rightarrow \infty$
+in probability sense by corollary 12.3.1.\\
+(Or for eigenfunction part convergence, using problem 5's result considering the form dividing problem's expression by $N$. 
+And for eigenvalue part convergence, do like procedure of solving problem 5 using the eigenvalue part of theorem 12.2.1 and Chebyshev's inequality.)\\ 
+So we can replace $\lambda_j, v_j$ with $\hat{\lambda}_j,\hat{v}_j$ with adding only ignorable terms in right-hand side,
+and if we disregard them, we get
+\[<\hat{v}_j-v_j, v_k>=\frac{<\hat{C}-C,\hat{v}_j \otimes v_k>}{\hat{\lambda}_j-\lambda_k}\]
+which we want
+
+
+\end{document}
