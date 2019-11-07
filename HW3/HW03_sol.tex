@@ -44,8 +44,8 @@ Show that for every eigenvalue $\lambda$ of a bounded operator $L$,
 we have $|\lambda|\leq||L||_{\mathcal{L}}$.
 }
 
-In problem's statement, $L$ is being assumed that it can be spectral decomposable 
-(i.e. self-adjoint, compact(or, Hilbert-Schmidt) operator), so I will work with these assumptions.
+In problem's statement, $L$ is being assumed to be spectral decomposable 
+(i.e. self-adjoint, compact(or more strongly, Hilbert-Schmidt) operator), so I will work with these assumptions.
 
 Firstly I claim that $||L||$ or $-||L||$ is eigenvalue of $L$.
 Without loss of generality, assume first case and denote $\lambda_1=||L||=\sup\{<Lf,f>:||f||=1\}$.
@@ -171,12 +171,21 @@ then, the last inner product term becomes 1 only $i=k$, and otherwise 0. So we c
 multiply $\sqrt{N}$ to both sides.
 And, because $\hat{\lambda}_j\rightarrow\lambda_j$ and $\hat{v}_j\rightarrow v_j$ as $N\rightarrow \infty$
 in probability sense.
-(I add some comment about these convergence. For eigenfunction part convergence, using problem 5's result considering the form dividing problem's expression by $N$. 
+(For showing eigenfunction part convergence in detail, using problem 5's result considering the form dividing problem's expression by $N$. 
 And for eigenvalue part convergence, do like procedure of solving problem 5 using the result of eigenvalue part of theorem 12.2.1 and Chebyshev's inequality.)\\ 
 So we can replace $\lambda_j, v_j$ with $\hat{\lambda}_j,\hat{v}_j$ with adding only ignorable terms in right-hand side,
 and if we disregard them, we get
 \[<\hat{v}_j-v_j, v_k>=\frac{<\hat{C}-C,\hat{v}_j \otimes v_k>}{\hat{\lambda}_j-\lambda_k}\]
-which we want. (Can I commute tensor product term in inner product?)
+which we want. 
+
+(comment: Can I commute tensor product term in inner product? Intuitively, in general, may be No. But in this case,
+thinking only above equation and view $C,\hat{C},v_k\otimes\hat{v}_j$ 
+as operator of $\mathcal{H}_1\times\mathcal{H}_2\rightarrow\mathcal{H}$ 
+where $\mathcal{H}=\mathcal{H}_1=\mathcal{H}_2$,
+let's consider the domain-permuted(?) operator of $C,\hat{C},\hat{v}_j\otimes v_k$ 
+such that $\mathcal{H}_2\times\mathcal{H}_1\rightarrow\mathcal{H}$.
+then, $C, \hat{C}$ is invariant because of their definition, so are LHS's $v_j, \hat{v}_j, v_k$ and RHS's $\hat{\lambda}_j,\lambda_k$.
+And only last thing changes to correspond to $\hat{v}_j \otimes v_k$. So I may commute with tensor product in our special context.)
 
 For finding distribution, using this result and apply CLT to $\sqrt{N}(\hat{C}-C)$ (like theorem 12.3.1), or taking the result of corollary12.3.1 directly, 
 we get the asymptotic distribution of \(N^{-1/2}<\hat{v}_j-v_j,v_k>\) as
