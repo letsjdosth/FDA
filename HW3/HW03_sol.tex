@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath,amssymb,setspace,verbatim,graphicx,enumerate,enumitem}
-\usepackage[top=1in,bottom=1in,left=1in,right=1in,nohead,nofoot]{geometry}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in,head=0.5in,foot=0.5in]{geometry}
 \usepackage{caption}
 \usepackage{mathtools}
 % \usepackage{subcaption}
@@ -48,7 +48,9 @@ In problem's statement, $L$ is being assumed to be spectral decomposable
 (i.e. self-adjoint, compact(or more strongly, Hilbert-Schmidt) operator), so I will work with these assumptions.
 
 Firstly I claim that $||L||$ or $-||L||$ is eigenvalue of $L$.
-Without loss of generality, assume first case and denote $\lambda_1=||L||=\sup\{<Lf,f>:||f||=1\}$.
+Without loss of generality, assume the former case and denote $\lambda_1=||L||=\sup\{<Lf,f>:||f||=1\}$.
+(the proof for $||L||=-\lambda_1$ case is similar to following argument.)
+
 Let $\{f_n\}\in\mathcal{H}$ such that $||f_n||=1$, $<Tf_n,f_n>\rightarrow\lambda_1$ 
 and $Tf_n\rightarrow g$ for some $g\in\mathcal{H}$.
 (such $\{f_n\},g$ exist because $L$ is compact and $\mathcal{H}$ is complete.)
@@ -60,13 +62,13 @@ Then
 So $Lf_n\rightarrow g$, $\lambda_1 f_n\rightarrow g$, and under continuity of $L$ from the assumptions,
 we get $\lambda_1 g = Lg$. And we also verify $g\neq0$ because if 0, it becomes $\lambda_1=||L||=0$, contradiction.
 thus $\lambda_1$ is eigenvalue of $L$.
-(The proof for $||L||=-\lambda_1$ case is similar.)
 
-Next I claim one more thing that above $\lambda_1=\max{|\lambda|}$ over all $\lambda$s which are eigenvalues of $L$.
-Without loss of generality, consider only the case all eigenvalues of $L$ is nonnegative. 
+
+Next, I claim one more thing that above $\lambda_1=\max{|\lambda|}$ over all $\lambda$s which are eigenvalues of $L$.
+Without loss of generality, assume as above and the case all eigenvalues of $L$ is nonnegative. 
 (if not, change sign of it and its pair eigenfunction together.)
 Assume the claim is false, then there are $\lambda^*$ and the pair eigenfuction $v^*$ whose norm is 1.
-Then, $Lv^*=\lambda^*>\lambda_1=||L||=\sup_{||v||=1}||Lv||$, we have contradiction (to sup and definition of operator norm).
+Then, $\lambda^*>\lambda_1=||L||=\sup_{||v||=1}||Lv||$, we have contradiction (to sup and definition of operator norm).
 So, all eigenvalues of $L$ are smaller then $\lambda_1$, and it is what we want,
 $|\lambda|\leq||L||=\lambda_1$.
 
@@ -90,14 +92,14 @@ With hint of the problem, I'll show that
 Then by theorem 12.2.1 on our book, under our assumptions, we know that
 \[\limsup_{N\rightarrow \infty} NE[||\hat{v}_j-v_j||^2]<C\]
 for some $C$ and $j=1,...,p$. 
-On other hand, by Chebyshev's inequality,
+On other hand, by Chebyshev's inequality, for all $\alpha>0$,
 \[Pr(N||(\hat{v_j}-v_j)||^2>\alpha)<\frac{NE[||\hat{v}_j-v_j||^2]}{\alpha}\]
-The result of above theorem says that right-hand side is bounded in probability sense for all $\alpha>0$.
+The result of above theorem says that right-hand side is bounded by $C/\alpha$ in probability sense for all $\alpha>0$.
 Then using definition of boundedness in probability to left-hand side,
-we get \(N||\hat{v_j}-v_j||^2\) is bounded in probability, which we want.
+we get \(N||\hat{v_j}-v_j||^2\) is also bounded in probability, which we want.
 
-Since this proof (and the base theorem) depend on the strong condition that whole points of function are completely observable, 
-the inner product term(view as 'weak distance' heuristically) is bounded of rate $O(N^{-1})$,
+Since this proof (and the base theorem) depend on a strong condition that whole points of function are completely observable, 
+the inner product term (view as 'weak distance' heuristically) is bounded of rate $O(N^{-1})$,
 unusual(-ly good) rate comparing to ordinary parametric rate $O(N^{-1/2})$. 
 
 
@@ -111,11 +113,11 @@ Let $x,y\in\mathcal{H}$. Then
 
 When we view tensor as operator, \(x\otimes y(.)=<y,.>x\) holds. 
 Using this fact, when $\{e_i\}$ are orthonormal basis of $\mathcal{H}$,
-by the definition of Hilbert-Schmidt norm equipped on $\mathcal{S}$,
+by the definition of Hilbert-Schmidt norm equipped on $\mathcal{S}$, we are able to write
 \[||<y,.>x||^2_{\mathcal{S}}=\sum_{i=1}^{\infty}||(<y,z>x)e_i||^2 \text{ for } \forall z\in\mathcal{H}\]
 then by Parseval's identity,
 \[=||<y,z>x||^2_{\mathcal{H}} \text{ for } \forall z\in\mathcal{H}\]
-then by above relation between inner product and tensor product and since $z$ is arbitrary,
+then by above relation between inner product and tensor product, and since $z$ is arbitrary,
 \[=||x\otimes y||^2_{\mathcal{H}\otimes\mathcal{H}}\]
 
 
@@ -137,8 +139,8 @@ For notational convenience, I'll omit hat-expression (except some variable) desp
 \item Fit to N function-objects $X_1,...,X_N$ using basis $\{e_j\}$ in (normally) $L^2$ with data points $x_{nj}$,
     and get $X_n(t)=\sum_m c_{nm}B_m(t)$ form where $B_m$ is m-th basis and t becomes data points of each curve. \\
     In practice, do some transformation corresponding to chosen basis 
-    (for example, if choose Fourier basis, then get Fourier series expression algorithm-matically.)
-     and keep the coefficients as form of matrix.
+    (for example, if you choose Fourier basis, then get Fourier series expression.)
+     and keep the coefficients $c_{nm}$ of each basis and of each curves as form of matrix.
 \item Get sample mean function $\hat{\mu}(t)=N^{-1}\sum_{n=1}^NX_n(t)$.
     we get it easily by just calculating means over each coefficients of each basis respectively and taking sum,
     so $\hat{\mu}(t)=\sum_m(N^{-1}\sum_nc_{nm})B_m(t)$. \\
@@ -146,10 +148,10 @@ For notational convenience, I'll omit hat-expression (except some variable) desp
 \item Get sample covariance operator (if need, adjust mean to 0.) $\hat{c}(t,s)=N^{-1}\sum_{n=1}^N(X_n(t)-\hat{\mu}(t))(X_n(s)-\hat{\mu}(s))$.\\
     In practice, calculate $\tilde{c}_{nm}=c_{nm}-\bar{c}_{m}$ and get $\tilde{c}_{m_1}^{T}\tilde{c}_{m_2}$,
     then the ($m_1m_2$)-th element becomes the coefficient of $B_{m_1}(t)B_{m_2}(t)$.
-\item Find eigenpairs, $\lambda_j v_j(t) = \int_0^1\hat{c}(t,s)v_j(s)ds$. \\ 
+\item Find eigenpairs, $\lambda_j v_j(t) = \int\hat{c}(t,s)v_j(s)ds$. \\ 
     In practice, find $\lambda_j$s and $v_j$s by solving $\lambda_j\int v_j(t)B_{m_1}(t)dt = \int \int \hat{c}(t,s)v_j(s)B_{m_1}(t)ds dt$.
     In detail, we replace integral with sum, $\lambda_j v_j(t) = \sum_{s} \hat{c}(t,s)v_s$, so solve
-    $\lambda_jv_{jm_1}=\sum_{m_3}\tilde{c}_{m_1}^{T}\tilde{c}_{m_3} v_{jm_3}$.
+    $\lambda_jv_{jm_1}=\sum_{m_3}\tilde{c}_{m_1}^{T}\tilde{c}_{m_3} v_{jm_3}$ for all $j$.
 \end{enumerate}
 At last step, (replace notation $j$ to $i$ and now use $j$ for index of basis) we get $\hat{v}_{ij}$ values which we want.
 
@@ -168,11 +170,11 @@ Take both side to $<., v_k>$ and neglect ignorable term, then
 \[N^{1/2}<\hat{v}_j-v_j,v_k>=\sum_{i\neq j}\frac{1}{\lambda_j-\lambda_i}<\sqrt{N}(\hat{C}-C), v_i\otimes v_j><v_i,v_k>\]
 then, the last inner product term becomes 1 only $i=k$, and otherwise 0. So we can rewrite it without summation symbol as 
 \[N^{1/2}<\hat{v}_j-v_j,v_k>=\frac{\sqrt{N}<\hat{C}-C, v_k\otimes v_j>}{\lambda_j-\lambda_k}\]
-multiply $\sqrt{N}$ to both sides.
+multiply $1/\sqrt{N}$ to both sides.
 And, because $\hat{\lambda}_j\rightarrow\lambda_j$ and $\hat{v}_j\rightarrow v_j$ as $N\rightarrow \infty$
 in probability sense.
-(For showing eigenfunction part convergence in detail, using problem 5's result considering the form dividing problem's expression by $N$. 
-And for eigenvalue part convergence, do like procedure of solving problem 5 using the result of eigenvalue part of theorem 12.2.1 and Chebyshev's inequality.)\\ 
+(For showing eigenfunction part convergence in detail, divide the form of problem 5's result by $N$ and observe it. 
+And for eigenvalue part convergence, do like procedure of solving problem 5 using the result of eigenvalue part of theorem 12.2.1 and applying Chebyshev's inequality.)\\ 
 So we can replace $\lambda_j, v_j$ with $\hat{\lambda}_j,\hat{v}_j$ with adding only ignorable terms in right-hand side,
 and if we disregard them, we get
 \[<\hat{v}_j-v_j, v_k>=\frac{<\hat{C}-C,\hat{v}_j \otimes v_k>}{\hat{\lambda}_j-\lambda_k}\]
@@ -182,10 +184,10 @@ which we want.
 thinking only above equation and view $C,\hat{C},v_k\otimes\hat{v}_j$ 
 as operator of $\mathcal{H}_1\times\mathcal{H}_2\rightarrow\mathcal{H}$ 
 where $\mathcal{H}=\mathcal{H}_1=\mathcal{H}_2$,
-let's consider the domain-permuted(?) operator of $C,\hat{C},\hat{v}_j\otimes v_k$ 
+let's consider the domain-permuted(?) operators of $C,\hat{C},\hat{v}_j\otimes v_k$ 
 such that $\mathcal{H}_2\times\mathcal{H}_1\rightarrow\mathcal{H}$.
 then, $C, \hat{C}$ is invariant because of their definition, so are LHS's $v_j, \hat{v}_j, v_k$ and RHS's $\hat{\lambda}_j,\lambda_k$.
-And only last thing changes to correspond to $\hat{v}_j \otimes v_k$. So I may commute with tensor product in our special context.)
+And only last thing is changed to $\hat{v}_j \otimes v_k$. So at above equation, I may commute with tensor product without any other adjustment in our special context.)
 
 For finding distribution, using this result and apply CLT to $\sqrt{N}(\hat{C}-C)$ (like theorem 12.3.1), or taking the result of corollary12.3.1 directly, 
 we get the asymptotic distribution of \(N^{-1/2}<\hat{v}_j-v_j,v_k>\) as
