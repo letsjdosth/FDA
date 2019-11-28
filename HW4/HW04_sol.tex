@@ -8,6 +8,9 @@
 % \usepackage{subfloat}
 % \usepackage{tabularx}
 \usepackage{mdframed}
+\usepackage{amsthm}
+
+\newtheorem*{theorem}{Theorem}
 
 \newenvironment{Rcode}% environment name 
 {%begin code
@@ -87,11 +90,10 @@ i.e. for any real numbers $x_1,x_2,...,x_K$,
 \[\sum_{k,l=1}^K \varphi_{kl}x_kx_l\geq 0\]
 }
 
-
 For becoming this problem to be proper, there should be a assumption: "each $\varphi_i$ is in $\mathcal{L}^2$",
 rather than "any function $\varphi$".
 Because if not, the value $\varphi_{kk}=\int\varphi_k\varphi_k=\int\varphi_k^2$ may be not well defined. 
-($\varphi_{kk}$ may become $\infty$, so )
+($\varphi_{kk}$ may become $\infty$.)
 
 Then, with inner product and norm of $\mathcal{L}^2$, observe that for any $x_i\in\mathcal{R}$,
 \[||\sum_i^K{x_i\varphi_i}||_{\mathcal{L}^2}^2 = \langle \sum_k^K{x_k\varphi_k}, \sum_l^K{x_l\varphi_l} \rangle_{\mathcal{L}^2}
@@ -114,21 +116,107 @@ Show that if $\{u_j, j\geq 1\}$ and $\{v_i, i\geq 1\}$ are both orthonormal syst
 then above equation is an orthonormal system as well.
 }
 
-Since $\mathcal{L}^2$ is separable Hilbert space, we need to show only that for $f\in \mathcal{L}^2([0,1]\times[0,1])$,
+I start with some comments. First, it seems that there are many methods to solve this problem, and considering tensor-product space is one of them.
+But I don't choose the way because I think that it seems to use this one thing's result for proving original one thing.
+Instead, I try to direct proof for this problem.
+
+Second, I use Fubini's theorem on Lebesgue measurable function, famous and elementary one in Lebesgue integration theory,
+but not having been dealt with in our course. So I may have to prove it to use, 
+but because proof of the theorem is too long to bring this report,
+I only write down the statements of the theorem.
+
+\begin{theorem}[Fubini's]
+    Suppose $f(x,y)$ is in $\mathcal{L}^1$ on $\mathcal{R}^{d_1}\times \mathcal{R}^{d_2}$.
+    Then for almost every $y \in \mathcal{R}^{d_2}$:
+    \begin{itemize}
+        \item for fixed y, the slice $f^y$ is in $\mathcal{L}^1(\mathcal{R}^{d_1})$, such that $f^y(x)=f(x,y)$.
+        \item The function defined by $\int_{\mathcal{R}^{d_1}}f^y(x)dx$ is in $\mathcal{L}^2(\mathcal{R}^{d_2})$.
+        \item $\int_{\mathcal{R}^{d_2}}(\int_{\mathcal{R}^{d_1}}f(x,y)dx)dy=\int_{\mathcal{R}^{d_1}\times \mathcal{R}^{d_2}}f$
+    \end{itemize}
+\end{theorem}
+Note that if replace $\mathcal{R}$ with $[0,1]\subset\mathcal{R}$, above theorem holds.
+
+Then let's start to solve this problem.
+
+Since $\mathcal{L}^2$ is separable Hilbert space, I need to show only that for any $f\in \mathcal{L}^2([0,1]\times[0,1])$,
 $f$ has an expression of linear combination of $\{v_i(s)u_j(t)\}$.
 
-So, put $w_{ij}((s,t))=v_i(s)u_j(t)$ on $[0,1]\times[0,1]$ for all $i,j$.
-Then note that, $\int{w_{ij}} \leq ||v_i||||u_j||<\infty$ by Cauchy-Schwartz inequality,
-so $w_{ij}\in\mathcal{L}^2([0,1]\times[0,1])$.
+Although the direction of this problem says that each basis are not necessarily orthonormal respectively, 
+we already know well that there exists 1-1 correspond linear transformation from $\mathcal{H}$ to $\mathcal{H}$ between
+given non-orthonormal basis and newly given orthonormal basis. 
+(For detail, if need to make orthonormal basis newly, using gram-schmidt process, we can get (may be infinite but theoretically have no problem)
+linear-equation system between non-orthonormal and also get orthonormal basis and linear transformation which maps them.
+if there is other given orthonormal system, just project original non-orthonormal basis to them. Projection operator's uniqueness are guaranteed.)
+So without any loss of generality, I assume that $\{u_j, j\geq 1\}$ and $\{v_i, i\geq 1\}$ are
+orthonormal basis in $\mathcal{L}^2([0,1])$ for simplicity of the proof.
+
+Let $f\in \mathcal{L}^2([0,1]\times[0,1])$ and write $f$ as $f(t,s)$ using variable of $t,s\in[0,1]$ respectively.
+Note that, since the domain of $f$ is finite measure space, if $f\in\mathcal{L}^2$, automatically $f\in\mathcal{L}^1$.
+Then, by fix $t$ such that the slice $f^t$ of $f$ is in $L^1([0,1]) \cap \mathcal{L}^2([0,1])$, get $f^t(s)$,
+using Fubini's theorem (the first dot statement guarantees that almost every $t$, $f^t$ satisfying $\mathcal{L}^1$ condition) and
+the fact that originally $f\in \mathcal{L}^2([0,1]\times[0,1])$.
+Then, since $f^t$ in $L^2([0,1])$, using parseval's identity with second coordinate's orthonormal basis $\{v_i, i\geq 1\}$,
+we get expression like 
+\[f^t(s)=\sum_{i\geq 1}a_i(t)v_i(s)\]
+where \(a_i(t)=\langle f^t, v_i \rangle=\int_{[0,1]}f^t(s)v_i(s)ds\).
+Note that the coefficients are depend on t value.
+
+And observe that
+\[||a_i(t)||^2_{\mathcal{L}^2}=\int_{[0,1]}|\int_{[0,1]}f^t(s)v_i(s)ds|^2dt
+\leq \int_{[0,1]}(\int_{[0,1]}|f^t(s)v_i(s)|ds)^2dt\]
+\[\leq \int_{[0,1]}(||f^t(s)||_{\mathcal{L}^2([0,1])}^{1/2}||v_i(s)||_{\mathcal{L}^2([0,1])}^{1/2})^2dt
+=||f^t(s)||_{\mathcal{L}^2([0,1])}||v_i(s)||_{\mathcal{L}^2([0,1])}
+< \infty\]
+so $a_i(t)$ in $\mathcal{L}^2([0,1])$.
+Then apply parseval's identity with first coordinate's orthonormal basis $\{u_j, j\geq 1\}$ to $a_i(t)$,
+get $a_i(t)=\sum_{j \geq 1} b_ju_j$ where $b_j=\langle a_i, u_j\rangle$.
+then we get following expression
+\[f^t(s)=\sum_{i\geq 1}a_i(t)v_i(s)=\sum_{i\geq 1}\sum_{j \geq 1} b_ju_j(t)v_i(s)\]
+that we want.
+
+And since $||u_j(t)v_i(s)||_{\mathcal{L}^2([0,1]\times[0,1])}=||u_j(t)||_{\mathcal{L}^2([0,1])}||v_i(s)||_{\mathcal{L}^2([0,1])}=1$,
+$\{u_j(t)v_i(s)\}$ is in $\mathcal{L}^2([0,1]\times[0,1])$ and by above result, becomes basis of $\mathcal{L}^2([0,1]\times[0,1])$.
+
+Let's verify $\{u_j(t)v_i(s)\}$ are orthonormal. At just above, we see $||u_j(t)v_i(s)||_{\mathcal{L}^2([0,1]\times[0,1])}=1$.
+And observe that using the Fubini theorem (at second equality),
+\[\langle u_jv_i, u_kv_l \rangle_{\mathcal{L}^2([0,1]\times[0,1])} =\int_{[0,1]\times[0,1]} u_jv_iu_kv_l = \int_{[0,1]}\int_{[0,1]} u_j(t)v_i(s)u_k(t)v_l(s)dt ds\]
+\[=\int_{[0,1]} v_i(s)v_l(s) (\int_{[0,1]} u_j(t)u_k(t) dt) ds=(\int_{[0,1]} v_i(s)v_l(s)ds) (\int_{[0,1]} u_j(t)u_k(t) dt) \]
+\[= \langle u_j, u_k \rangle_{\mathcal{L}^2([0,1])} \langle v_i, v_l \rangle_{\mathcal{L}^2([0,1])}\]
+Since $\{u_j\}, \{v_i\}$ are orthonormal basis, 
+\[
+    \langle u_jv_i, u_kv_l \rangle_{\mathcal{L}^2([0,1]\times[0,1])}=
+\begin{cases}
+    1, & \text{if } j=k,i=l \\ 
+    0, & \text{otherwise}
+\end{cases}
+\]
+So $\{u_j(t)v_i(s)\}$ are orthonormal basis.
 
 \section{Chapter 6}
 \subsection{Problem 5}
 \textbf{
-Assume $Y_n$ are independent Bernoullis with mean $E[Y_n]=p_n=logit^{-1}(X_n^T\beta)$ and 
+Assume $Y_n$ are independent Bernoulli random variables with mean $E[Y_n]=p_n=logit^{-1}(X_n^T\beta)$ and 
 variance $Var(Y_n)=p_n(1-p_n)$, as in Example 6.1.2.
 Find the estimating equation (6.6), i.e. replace $\mu$ etc with their corresponding values.
 }
 
+I will use the notation of chapter 6.1 of book, especially of example 6.1.2's and following material's.
+
+Since $E[Y_n]=p_n=logit^{-1}(X_n^T\beta)=\frac{e^{X_n^T\beta}}{1+e^{X_n^T\beta}}$, 
+put $\theta_n=logit(p_n)=logit(logit^{-1}(X_n^T\beta))=X_n^T\beta$ to get canonical form of distribution.
+And because $Y_n\sim Ber(p_n) = Bin(1,p_n)$, if we continue to follow the book's expression (6.2) for exponential family, 
+i.e. \(f(y|\theta,\phi)=exp\{\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\}\), we get
+$a(\phi)=1$ and $b(\theta_n)=log(1+e^{\theta_n})$.
+(For more detail, see Example 6.1.2 considering $n=1$ case.)
+Then $\mu=b'(\theta_n)=\frac{e^{\theta_n}}{1+e^{\theta_n}}$ and $g^{-1}=b'$.
+
+Then, from the log-likelihood function $l(\theta(\beta))$ of distributions in exponential family, 
+the estimation equation of this model becomes
+\[\frac{\partial l(\theta(\beta))}{\partial\beta} = \sum_{n=1}^N \frac{\partial\theta_n}{\partial\beta} \frac{Y_n-b'(\theta_n)}{a(\phi)}=0\]
+and by plugging above things,
+\[\sum_{n=1}^N (\frac{\partial}{\partial\beta}(X_n^T\beta)) (Y_n-\frac{e^{\theta_n}}{1+e^{\theta_n}})=0\]
+\[\sum_{n=1}^N X_n(Y_n-\frac{e^{X_n^T\beta}}{1+e^{X_n^T\beta}})=0\]
+The last equation is what we want. (In practice, find $\beta$ satisfying this equation numerically.)
 
 \section{Chapter 6}
 \subsection{Problem 6}
@@ -136,9 +224,95 @@ Find the estimating equation (6.6), i.e. replace $\mu$ etc with their correspond
 Consider a Gaussian process $Z(t)$ in $\mathcal{L}^2([0,1])$ with mean $0$ and covariance $C$.
 Suppose we also have a second process $X(t):=\mu(t)+Z(t)$.
 Let $v_j(t)$ be the eigenfunctions of $C$ and $\lambda_j$ the eigenvalues.
+}
+
+\textbf{
 a. Write down the joint density of $\{\langle Z, v_1\rangle,...,\langle Z, v_m\rangle\}$ for some fixed $m\in\mathcal{N}$.
 Write down the joint density of $\{\langle X, v_1\rangle,...,\langle X, v_m\rangle\}$.
+}
+
+For notational convenience, I omit .(t) for expression of functions.
+
+Since $Z \sim N(0, C)$, by definition of functional distribution in weak sense,
+\(\langle Z, x\rangle \sim N(\langle 0,x \rangle, \langle C(x),x\rangle)\) for all $x\in \mathcal{H}=\mathcal{L}^2([0,1])$.
+So, with eigenfunctions $\{v_i\}$, we get multivariate normal distribution for
+\[\{\langle Z, v_i\rangle\}_{i=1,2,...,m} \sim Normal_m(
+\begin{bmatrix}
+    \langle 0,v_1 \rangle \\
+    \langle 0,v_2 \rangle \\
+    ... \\
+    \langle 0,v_m \rangle
+\end{bmatrix}
+,
+\begin{bmatrix}
+    \langle C(v_1),v_1 \rangle & \langle C(v_1),v_2 \rangle & ... & \langle C(v_1),v_m \rangle \\
+    \langle C(v_2),v_1 \rangle & \langle C(v_2),v_2 \rangle & ... & \langle C(v_2),v_m \rangle \\
+    ... \\
+    \langle C(v_m),v_1 \rangle & \langle C(v_m),v_2 \rangle & ... & \langle C(v_m),v_m \rangle \\
+\end{bmatrix}
+)\]
+For simplicity, denote the covariance matrix as $\Sigma_m$. Then we simply write above as
+\[\{\langle Z, v_i\rangle\}_{i=1,2,...,m} \sim Normal_m(0,\Sigma_m)\]
+And the pdf of multivariate normal is well known. 
+If denote \(\{\langle Z, v_i\rangle\}_{i=1,2,...,m}\) as vector $z_m$, then
+\[
+    f_m(z_m) = \frac{1}{(\sqrt{2\pi})^m det(\Sigma_m)}exp{(-\frac{1}{2}(z_m-0)^T\Sigma_m^{-1}(z_m-0))}
+\]
+
+Likewise, since $X:=\mu+Z$,
+\[\{\langle X, v_i\rangle\}_{i=1,2,...,m} \sim Normal_m(
+\begin{bmatrix}
+    \langle \mu,v_1 \rangle \\
+    \langle \mu,v_2 \rangle \\
+    ... \\
+    \langle \mu,v_m \rangle
+\end{bmatrix}
+,
+\begin{bmatrix}
+    \langle C(v_1),v_1 \rangle & \langle C(v_1),v_2 \rangle & ... & \langle C(v_1),v_m \rangle \\
+    \langle C(v_2),v_1 \rangle & \langle C(v_2),v_2 \rangle & ... & \langle C(v_2),v_m \rangle \\
+    ... \\
+    \langle C(v_m),v_1 \rangle & \langle C(v_m),v_2 \rangle & ... & \langle C(v_m),v_m \rangle \\
+\end{bmatrix}
+)\]
+with denoting the mean vector as $\mu_m$ covariance matrix as $\Sigma_m$. Then we simply write above as
+\[\{\langle X, v_i\rangle\}_{i=1,2,...,m} \sim Normal_m(\mu_m,\Sigma_m)\]
+and pdf
+\[
+    f_m(x_m) = \frac{1}{(\sqrt{2\pi})^m det(\Sigma_m)}exp{(-\frac{1}{2}(x_m-\mu_m)^T\Sigma_m^{-1}(x_m-\mu_m))}
+\]
+where \(\{\langle X, v_i\rangle\}_{i=1,2,...,m}\)(as vector) $=x_m$
+
+\textbf{
 b. You can obtain the density of $\{\langle X, v_i\rangle\}$ with respect to $\{\langle Z,v_i \rangle\}$,
 by taking their ratio. Write down this ratio.
 }
+
+By direct calculation for ratio of two pdfs of (a) with input common $Y_m$, we get
+\[exp(-\frac{1}{2}((Y_m-\mu_m)^T\Sigma_m^{-1}(Y_m-\mu_m)-Y_m^T\Sigma_m^{-1}Y_m))\]
+\[=exp(-\frac{1}{2}(-\mu_m^T\Sigma_m^{-1}Y_m-Y_m^T\Sigma_m^{-1}\mu_m+\mu_m^T\Sigma^{-1}\mu_m))\]
+
+\textbf{
+c. Suppose you tried to take the limit $m \rightarrow \infty$ of the ratio you obtained in (b).
+What requirement on $\mu$ do you need to ensure the limit exist and is finite?
+}
+
+Simply we need $Y_m^T\Sigma_m^{-1}\mu_m < \infty$ for all $Y\in \mathcal{R}^m$ as $m\rightarrow\infty$.
+For detail, since we are assuming that $C$ is proper covariance operator,
+the eigenvalue $\lambda_m$ of $C$ vanishes as $m$ goes to $\infty$. So if $Y_m^T\mu_m$ is bounded as $m\rightarrow\infty$,
+we can ensure the existence of the limit.
+
+\textbf{
+d. Based on the above, form a hypothesis about when the distribution of X is orthogonal/equivalent 
+to the distribution of Z.
+}
+
+Since $X(t):=\mu(t)+Z(t)$ in this problem's setting, 
+$E(XZ)=Cov(X,Z)+E(X)E(Z)=Cov(X,Z)$ in weak sense (for simplicity, I omit overt $\langle .x \rangle, x\in \mathcal{L}^2([0,1])$ notation.)
+could not be 0 except the degenerate case. So We cannot form a hypothesis about orthogonal conditions.
+
+For equivalence condition, $\langle \Sigma_mY_m, \mu_m\rangle=0$ for all $Y_m$ and for all $m\in\mathcal{N}$
+Or, at limit as $m\rightarrow\infty$, $\langle Cy, \mu\rangle=0$ for all $y\in\mathcal{L}^2([0,1])$.
+Or more simply, $\mu=0$.
+
 \end{document}
