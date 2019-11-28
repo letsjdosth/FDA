@@ -152,7 +152,7 @@ orthonormal basis in $\mathcal{L}^2([0,1])$ for simplicity of the proof.
 
 Let $f\in \mathcal{L}^2([0,1]\times[0,1])$ and write $f$ as $f(t,s)$ using variable of $t,s\in[0,1]$ respectively.
 Note that, since the domain of $f$ is finite measure space, if $f\in\mathcal{L}^2$, automatically $f\in\mathcal{L}^1$.
-Then, by fix $t$ such that the slice $f^t$ of $f$ is in $L^1([0,1]) \cap \mathcal{L}^2([0,1])$, get $f^t(s)$,
+Then, by fix $t$ such that the slice $f^t$ of $f$ is in $L^1([0,1]) \cap \mathcal{L}^2([0,1])=\mathcal{L}^2([0,1])$, get $f^t(s)$,
 using Fubini's theorem (the first dot statement guarantees that almost every $t$, $f^t$ satisfying $\mathcal{L}^1$ condition) and
 the fact that originally $f\in \mathcal{L}^2([0,1]\times[0,1])$.
 Then, since $f^t$ in $L^2([0,1])$, using parseval's identity with second coordinate's orthonormal basis $\{v_i, i\geq 1\}$,
@@ -161,13 +161,13 @@ we get expression like
 where \(a_i(t)=\langle f^t, v_i \rangle=\int_{[0,1]}f^t(s)v_i(s)ds\).
 Note that the coefficients are depend on t value.
 
-And observe that
+And observe that for almost every $t$, $a_i(t)\in\mathcal{L}^1([0,1])$ by second statement of Fubini theorem and,
 \[||a_i(t)||^2_{\mathcal{L}^2}=\int_{[0,1]}|\int_{[0,1]}f^t(s)v_i(s)ds|^2dt
 \leq \int_{[0,1]}(\int_{[0,1]}|f^t(s)v_i(s)|ds)^2dt\]
 \[\leq \int_{[0,1]}(||f^t(s)||_{\mathcal{L}^2([0,1])}^{1/2}||v_i(s)||_{\mathcal{L}^2([0,1])}^{1/2})^2dt
 =||f^t(s)||_{\mathcal{L}^2([0,1])}||v_i(s)||_{\mathcal{L}^2([0,1])}
 < \infty\]
-so $a_i(t)$ in $\mathcal{L}^2([0,1])$.
+so $a_i(t)$ in $L^1([0,1]) \cap \mathcal{L}^2([0,1])=\mathcal{L}^2([0,1])$.
 Then apply parseval's identity with first coordinate's orthonormal basis $\{u_j, j\geq 1\}$ to $a_i(t)$,
 get $a_i(t)=\sum_{j \geq 1} b_ju_j$ where $b_j=\langle a_i, u_j\rangle$.
 then we get following expression
@@ -176,6 +176,11 @@ that we want.
 
 And since $||u_j(t)v_i(s)||_{\mathcal{L}^2([0,1]\times[0,1])}=||u_j(t)||_{\mathcal{L}^2([0,1])}||v_i(s)||_{\mathcal{L}^2([0,1])}=1$,
 $\{u_j(t)v_i(s)\}$ is in $\mathcal{L}^2([0,1]\times[0,1])$ and by above result, becomes basis of $\mathcal{L}^2([0,1]\times[0,1])$.
+(For showing 'since~'s first = more precisely, we should consider product measure with simple (characteristic function in math) function and 
+get $m_{[0,1]\times[0,1]}(B_1\times B_2)=m_{[0,1]}(B_1)m_{[0,1]}(B_2)$, 
+and then using simple approximation lemma of Lebesgue integrable(measurable) function and dominated convergence theorem,
+we can claim that the $||u_j(t)v_i(s)||_{\mathcal{L}^2([0,1]\times[0,1])}=||u_j(t)||_{\mathcal{L}^2([0,1])}||v_i(s)||_{\mathcal{L}^2([0,1])}$ norm value are same.
+But in this report, I would omit to write this step.)
 
 Let's verify $\{u_j(t)v_i(s)\}$ are orthonormal. At just above, we see $||u_j(t)v_i(s)||_{\mathcal{L}^2([0,1]\times[0,1])}=1$.
 And observe that using the Fubini theorem (at second equality),
@@ -298,6 +303,8 @@ What requirement on $\mu$ do you need to ensure the limit exist and is finite?
 }
 
 Simply we need $Y_m^T\Sigma_m^{-1}\mu_m < \infty$ for all $Y\in \mathcal{R}^m$ as $m\rightarrow\infty$.
+(The other term $\mu_m^T\Sigma_m^{-1}\mu_m$ is always positive by property of covariance matrix, so considering with the minus on exp,
+the term is bounded by 1, so need not to worry about it.)
 For detail, since we are assuming that $C$ is proper covariance operator,
 the eigenvalue $\lambda_m$ of $C$ vanishes as $m$ goes to $\infty$. So if $Y_m^T\mu_m$ is bounded as $m\rightarrow\infty$,
 we can ensure the existence of the limit.
