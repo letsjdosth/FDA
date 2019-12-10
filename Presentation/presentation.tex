@@ -33,7 +33,7 @@
 \newtheorem{exmp}{Example}[section]
 
 
-\title{Functional depths and related topics} 
+\title{Functional depths}
 \author{Choi Seokjun}
 \date{11 Dec. 2019}
 
@@ -75,9 +75,9 @@ a statistical depth function if it satisfies the following properties:
     \item Affine invariance \\
         $D(Ax+b,P_{AX+b})=D(X,P_X)$ holds for any $\mathbb{R}^p$-valued random vector $X$,
         any $p\times p$ nonsingular matrix A and any $b\in \mathbb{R}^p$.
-    \item Maximality at centre \\
+    \item Maximality at center \\
         $D(\theta,P)=sup_{x\in\mathbb{R}^p}D(x,P)$ holds for any $P\in\mathcal{P}$
-        having a unique centre of symmetry $\theta$ w.r.t. some notion of symmetry.
+        having a unique center of symmetry $\theta$ w.r.t. some notion of symmetry.
     \item Monotonicity relative to the deepest point \\
         For any $P \in \mathcal{P}$ having deepest point $\theta$, $D(x,P)\leq D(\theta+\alpha(x-\theta), P)$
         holds for all $\alpha\in[0,1]$.
@@ -120,8 +120,8 @@ a statistical depth function if it satisfies the following properties:
             \item distance invariance \\
                 $D(f(x),P_{f(X)})=D(X,P_X)$ for any $x\in\mathcal{F}$ and $f:\mathcal{F}\rightarrow\mathcal{F}$
                 such that for any $y\in\mathcal{F}$, $d(f(x),f(y))=a_fd(x,y)$, $a_f\in\mathbb{R}-\{0\}$.
-            \item Maximality at centre \\
-                For any $P\in\mathcal{P}$ with unique centre of symmetry 
+            \item Maximality at center \\
+                For any $P\in\mathcal{P}$ with unique center of symmetry 
                 $\theta$ w.r.t. some notion of symmetry, 
                 $D(\theta,P)=sup_{x\in\mathcal{F}}D(x,P)$.
             \item Monotonicity (strictly decreasing) relative to the deepest point \\
@@ -153,29 +153,34 @@ a statistical depth function if it satisfies the following properties:
             $d_P(Q,P)<\delta$ P-almost surely, where $d_P$ is metric on $\mathcal{P}$.
         \end{itemize}
     \end{defn}
+Other requirement? \\
+'convex depth level set'(ex. Narisetty and Nair, 2015),
+'null at the boundary'(or, similarly 'Vanishing at infinity')(Mosler and Polyakov, 2012),
+'non-degeneracy with gaussian process class' (Chakraborty and Chaudhuri, 2014b)
+
 \end{frame}
 
 
 
 \begin{frame}{Check the validity of existing depth on $\mathcal{F}$}
     \begin{itemize}
-        \item h-depth (Cuevas, Febrero and Fraiman(2007)) \\
-        $D_h(x,P)=E_X(K_h(||x-X||_{\mathcal{L}^2[0,1]}))$ on $\mathcal{L}^2[0,1]^p$ : FTTTTT
-        \item random-tukey depth (Cuesta-Albertos and Nieto-Reyes(2008))
+        \item h-depth (Cuevas, Febrero and Fraiman(2007)) : \textbf{FTTTTT}\\
+        $D_h(x,P)=E_X(K_h(||x-X||_{\mathcal{L}^2[0,1]}))$ on $\mathcal{L}^2[0,1]^p$ 
+        \item random-tukey depth (Cuesta-Albertos and Nieto-Reyes(2008)) : \textbf{TTFTFT}\\
         $D_{RT}(x,P)=min_{u\in\{u_j\}_{j=1}^k}min(P_{(u)}(-\infty,\langle u,x \rangle], P_{(u)}[\langle u,x \rangle,\infty))$ \\
-        where $P_{(u)}$: marginal distribution measure of $u$, on $\mathcal{L}^2[0,1]^p$ : TTFTFT
-        \item band depth(Lopez-Pintado and Romo(2009)) \\
+        where $P_{(u)}$: marginal distribution measure of $u$, on $\mathcal{L}^2[0,1]^p$
+        \item band depth(Lopez-Pintado and Romo(2009)) : \textbf{TTFTFT}\\
         $D_J(x,P)=\sum_{j=2}^J P_{S_j}(x\in S_j(P))$ where $S_j(P)=\{y\in\mathcal{F} : y(v)=\alpha_1X_1(v)+...+\alpha_jX_j(v), \alpha_k\in$(j-th dim simplex),$ v\in V, X_i\sim P\}$
-        on $\mathcal{C}$ with sup norm : TTFTFT
-        \item modified band depth (Lopez-Pintado and Romo(2009)) \\
-        $D_{MJ}(x,P)=\sum_{j=2}^J E(\lambda \{v\in V : x\in S_j(P)\})$ with above notation,
-        on $\mathcal{C}$ with sup norm : TTFTFT
-        \item half-region depth (Lopez-Pintado and Romo(2011)) \\
+        on $\mathcal{C}$ with sup norm 
+        \item modified band depth (Lopez-Pintado and Romo(2009)) : \textbf{TTFTFT}\\
+        $D_{MJ}(x,P)=\sum_{j=2}^J E(\lambda \{v\in V : x(v)\in S_j(P)\})$ with above notation,
+        on $\mathcal{C}$ with sup norm 
+        \item half-region depth (Lopez-Pintado and Romo(2011)) : \textbf{TFFTFT}\\
         $D_{HR}(x,P)=min\{P(X\in H_x), P(X\in E_x)\}$ where $H_x=\{y\in\mathcal{F} : y(v)\leq x(v) \text{ for all } v\in V\}$ and 
-        $E_x=\{y\in\mathcal{F} : y(v)\geq x(v) \text{ for all } v\in V\}$ on $\mathcal{C}$ with sup norm : TFFTFT
-        \item modified half-region depth (Lopez-Pintado and Romo(2011)) \\
+        $E_x=\{y\in\mathcal{F} : y(v)\geq x(v) \text{ for all } v\in V\}$ on $\mathcal{C}$ with sup norm 
+        \item modified half-region depth (Lopez-Pintado and Romo(2011)) : \textbf{TTFTFT}\\
         $D_{MHR}(x,P)=min\{E(\lambda\{v\in V, X(v)\leq x(v)\}), E(\lambda\{v\in V, X(v)\geq x(v)\})\}/\lambda(V)$
-        on $\mathcal{C}$ with sup norm : TTFTFT
+        on $\mathcal{C}$ with sup norm
     \end{itemize}
 
 \end{frame}
@@ -188,7 +193,7 @@ a statistical depth function if it satisfies the following properties:
         \item integrated depth (Fraiman, Muniz(2001) and  Cuevas, Fraiman(2009)) \\
         form of \(FD(x,P)=\int D(f(x),f(P)d\lambda(f))\)
         \item infimal depth (Mosler(2013))\\
-        form of \(ID(x,P)=inf_f D(f(x),x(P))\)
+        form of \(ID(x,P)=inf_f D(f(x),f(P))\)
         \item band depth (Lopez-Pintado, Romo(2009))\\
         form of \(BD(x,P)=P(x\in Band(X_1,...,X_K))\) on $\mathcal{C}$
         where $Band(x_1,x_2)=\{y\in\mathcal{C}: min\{x_1(v),x_2(v)\} \leq y(v) \leq max\{x_1(v),x_2(v)\}, v\in V\}$ \\
@@ -208,7 +213,7 @@ a statistical depth function if it satisfies the following properties:
         If $D$ is uniformly consistent for any $P\in\mathcal{P}$,
         then we say $D$ is universally consistent over $\mathcal{F}$.
     \end{defn}
-    \begin{thm}[Varadarajan(1952?)]
+    \begin{thm}[Varadarajan(1956)]
         Let $(S,d)$ be a sparable metric space and $\mu$ be any distribution (Borel probability measure) on S.
         Then the empirical measure $\mu_n$ converges to $\mu$ almost surely:
         \[P(\{w:\mu_n(.)(w)\rightarrow\mu\})=1\]
@@ -252,15 +257,15 @@ a statistical depth function if it satisfies the following properties:
         If all marginal distribution of $P$ is absolutely continuous, then also true for integrated depth type.
     \end{thm}
     Proof:  \\
-    step1: show $\tilde{P}_n\rightarrow P$ weakly almost every $\omega\in\Omega$ using Varadarajan theorem and with good property of fitting kernel. \\
-    step2: using inner D with good convergence property, show outer D converges weakly.
+    step1: show $\tilde{P}_n\rightarrow P$ weakly almost every $\omega\in\Omega$ using Varadarajan theorem and some good properties of fitting kernel. \\
+    step2: using convergence property of inner D, show outer D converges weakly.
 
 \end{frame}
 
 \begin{frame}{Consistency of functional depth: In practice}
     \begin{thm}[convergence rate of FD (Nagy,Ferraty(2018))]
         Let $P_n$ be empirical distribution of (true) n curves, and $\tilde{P_n}$ be one of fitted n curves.
-        
+
         Suppose $P(|X(s)-X(t)|\leq L|s-t|^\beta)=1$ for all $s,t \in [0,1]$.
 
         Then, for any $P\in\mathcal{P}$ on $\mathcal{L}^2[0,1]$, under some conditions,
@@ -286,17 +291,23 @@ a statistical depth function if it satisfies the following properties:
 
 \section{Application}
 \begin{frame}{Application}
-More need to develop this theory and related application,
 \begin{itemize}
+    \item Median estimation
     \item Robust and Nonparametric functional statistics \\
-    procedure of with rank, nonparametric estimation of distribution, ...
+    procedure of with rank, nonparametric estimation of distribution or summary statistic, ...
     \item Exploratory Data Analysis (EDA) \\
-    outlier finding, data detective works, ...
+    outlier detection, data expression (ex. functional box plot), ...\\
     (Center? Cluster? Symmetry? range(width)? gap(separation)? other irregularities?)
-    \item classification
-    if data can be classified by relation to the center.
+    \item classification \\
+    when data can be classified by relation to the center. \\
+    (if needed, after some transformation)
     \item (and other things...)
 \end{itemize}
+
+Note: Usability in application yields some other criteria about comparing depth.\\
+eg. 1. width(using depth) vs std relation? 2. validity of central region? 3. computational advantage?
+
+
 \end{frame}
 
 \end{document}
