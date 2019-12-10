@@ -97,7 +97,7 @@ a statistical depth function if it satisfies the following properties:
             (or just have upper semi-continuity)
         \item Continuity of D(x,P) as a function of P
         \item Quasi-concavicity as a function of x \\
-            The set $\{x:D(x,P)]\geq c\}$ is convex for each real $c$.
+            The set $\{x:D(x,P)\geq c\}$ is convex for each real $c$.
     \end{itemize}
 
     \begin{exmp} [on $\mathbb{R}^1$]
@@ -126,7 +126,7 @@ a statistical depth function if it satisfies the following properties:
                 $D(\theta,P)=sup_{x\in\mathcal{F}}D(x,P)$.
             \item Monotonicity (strictly decreasing) relative to the deepest point \\
                 For any $P \in \mathcal{P}$ s.t. $D(z,P)=max_{x\in\mathcal{F}}D(x,P)$ exists (:deepest point $z$), 
-                for $x,y\in\mathcal{F}$, $D(x,P)<D(y,P)<D(z,P)$ s.t. $min\{d(y,z),d(y,x)\}>0$ and $max\{d(y,z), d(y,x)<d(x,z)\}$.
+                for $x,y\in\mathcal{F}$, $D(x,P)<D(y,P)<D(z,P)$ s.t. $min\{d(y,z),d(y,x)\}>0$ and $max\{d(y,z), d(y,x)\}<d(x,z)$.
             
         \end{itemize}
         \end{defn}
@@ -139,10 +139,10 @@ a statistical depth function if it satisfies the following properties:
         \item Receptivity to convex hull width across the domain. \\
             Let $C(\mathcal{F},P)$ be convex hull in $(\mathcal{F},A,P)$ defined as
             \(C(\mathcal{F},P)=\{x\in\mathcal{F} : x(v)=\alpha L(v)+ (1-\alpha)U(v), v\in V, \alpha\in[0,1]\}\)
-            where $U=\{sup_{x\in\epsilon}x(v),v\in V\}$, $L=\{inf_{x\in\epsilon}x(v),v\in V\}$
-            and $\epsilon$ is smallest set in $A$ s.t. $P(\epsilon)=P(\mathcal{F})$.
+            where $U=\{sup_{x\in E}x(v):v\in V\}$, $L=\{inf_{x\in E}x(v):v\in V\}$
+            and $E$ is smallest set in $A$ s.t. $P(E)=P(\mathcal{F})$.
 
-            Then, condition: $D(x,P_X)<D(f(x),P_{f(X)})$ for any $x\in C(\mathcal{F},P)$
+            Then, $D$ has a property that $D(x,P_X)<D(f(x),P_{f(X)})$ for any $x\in C(\mathcal{F},P)$
             with $D(x,P)<sup_{y\in\mathcal{F}}D(y,P)$ and $f:\mathcal{F}\rightarrow\mathcal{F}$
             s.t. $f(y(v))=\alpha(v)y(v)$ with $\alpha(v)\in(0,1)$ for all $v\in L_{\delta}$ and $\alpha(v)=1$  otherwise
             where \(L_\delta = argsup_{H\in V} \{sup_{x,y\in C(\mathcal{F},P)} d(x(H),y(H)) \leq \delta\}\)
@@ -150,7 +150,7 @@ a statistical depth function if it satisfies the following properties:
         \item Continuity in P \\ 
             For all $x\in\mathcal{F}$, for all $P \in \mathcal{P}$ and for every $\epsilon>0$,
             there exists a $\delta(\epsilon)>0$ s.t. $|D(x,Q)-D(x-P)|\leq\epsilon$ P-almost surely for all $Q\in\mathcal{P}$ with
-            $d_P(Q,P)<\delta$ P-almost surely, where $d_P$ is metric (in weak topology).
+            $d_P(Q,P)<\delta$ P-almost surely, where $d_P$ is metric on $\mathcal{P}$.
         \end{itemize}
     \end{defn}
 \end{frame}
@@ -162,8 +162,8 @@ a statistical depth function if it satisfies the following properties:
         \item h-depth (Cuevas, Febrero and Fraiman(2007)) \\
         $D_h(x,P)=E_X(K_h(||x-X||_{\mathcal{L}^2[0,1]}))$ on $\mathcal{L}^2[0,1]^p$ : FTTTTT
         \item random-tukey depth (Cuesta-Albertos and Nieto-Reyes(2008))
-        $D_{RT}(x,P)=min_{u\in\{u_j\}_{j=1}^k}min(P_u(-\infty,\langle u,x \rangle], P_u[\langle u,x \rangle,\infty))$
-        where $P_u$: marginal distribution measure of $u$, on $\mathcal{L}^2[0,1]^p$ : TTFTFT
+        $D_{RT}(x,P)=min_{u\in\{u_j\}_{j=1}^k}min(P_{(u)}(-\infty,\langle u,x \rangle], P_{(u)}[\langle u,x \rangle,\infty))$ \\
+        where $P_{(u)}$: marginal distribution measure of $u$, on $\mathcal{L}^2[0,1]^p$ : TTFTFT
         \item band depth(Lopez-Pintado and Romo(2009)) \\
         $D_J(x,P)=\sum_{j=2}^J P_{S_j}(x\in S_j(P))$ where $S_j(P)=\{y\in\mathcal{F} : y(v)=\alpha_1X_1(v)+...+\alpha_jX_j(v), \alpha_k\in$(j-th dim simplex),$ v\in V, X_i\sim P\}$
         on $\mathcal{C}$ with sup norm : TTFTFT
@@ -171,7 +171,7 @@ a statistical depth function if it satisfies the following properties:
         $D_{MJ}(x,P)=\sum_{j=2}^J E(\lambda \{v\in V : x\in S_j(P)\})$ with above notation,
         on $\mathcal{C}$ with sup norm : TTFTFT
         \item half-region depth (Lopez-Pintado and Romo(2011)) \\
-        $D_{HR}(x,P)=min\{P(X\in H_x), P(X\in E_x)\}$ where $H_x=\{y\in\mathcal{F} : y(v)\leq x(v) for all v\in V\}$ and 
+        $D_{HR}(x,P)=min\{P(X\in H_x), P(X\in E_x)\}$ where $H_x=\{y\in\mathcal{F} : y(v)\leq x(v) \text{ for all } v\in V\}$ and 
         $E_x=\{y\in\mathcal{F} : y(v)\geq x(v) \text{ for all } v\in V\}$ on $\mathcal{C}$ with sup norm : TFFTFT
         \item modified half-region depth (Lopez-Pintado and Romo(2011)) \\
         $D_{MHR}(x,P)=min\{E(\lambda\{v\in V, X(v)\leq x(v)\}), E(\lambda\{v\in V, X(v)\geq x(v)\})\}/\lambda(V)$
@@ -208,7 +208,11 @@ a statistical depth function if it satisfies the following properties:
         If $D$ is uniformly consistent for any $P\in\mathcal{P}$,
         then we say $D$ is universally consistent over $\mathcal{F}$.
     \end{defn}
-
+    \begin{thm}[Varadarajan(1952?)]
+        Let $(S,d)$ be a sparable metric space and $\mu$ be any distribution (Borel probability measure) on S.
+        Then the empirical measure $\mu_n$ converges to $\mu$ almost surely:
+        \[P(\{w:\mu_n(.)(w)\rightarrow\mu\})=1\]
+    \end{thm}
 \end{frame}
 
 \begin{frame}{Consistency of functional depth}
@@ -240,13 +244,6 @@ a statistical depth function if it satisfies the following properties:
 
 
 \begin{frame}{Consistency of functional depth: In practice}
-    \begin{thm}[Varadarajan(1952?)]
-        Let $(S,d)$ be a sparable metric space and $\mu$ be any distribution (Borel probability measure) on S.
-        Then the empirical measure $\mu_n$ converges to $\mu$ almost surely:
-        \[P(\{w:\mu_n(.)(w)\rightarrow\mu\})=1\]
-    \end{thm}
-    Proof: application of SLLN.
-
     \begin{thm}[Consistency over partial observability, (Nagy,Ferraty(2018)]
         Let $P\in\mathcal{P}$ on $\mathcal{L}^2[0,1]$ and $\tilde{P_n}$ be empirical distribution of fitted $n$ curves.
         Then (under some assumptions,)
@@ -262,14 +259,18 @@ a statistical depth function if it satisfies the following properties:
 
 \begin{frame}{Consistency of functional depth: In practice}
     \begin{thm}[convergence rate of FD (Nagy,Ferraty(2018))]
-        For any $P\in\mathcal{P}$ on $\mathcal{L}^2[0,1]$, under some conditions,
+        Let $P_n$ be empirical distribution of (true) n curves, and $\tilde{P_n}$ be one of fitted n curves.
+        
+        Suppose $P(|X(s)-X(t)|\leq L|s-t|^\beta)=1$ for all $s,t \in [0,1]$.
+
+        Then, for any $P\in\mathcal{P}$ on $\mathcal{L}^2[0,1]$, under some conditions,
         \[sup_{x\in\mathcal{L}^2[0,1]}|FD(x,P_n)-FD(x,P)|=O_p(n^{-1/2})\]
         
-        If number of data points of $n$-th curve is comparable to $n^r$ and 
-        \(sup_{v\in[0,1]} sup_{|s-s'|\leq \epsilon} |P_v(s)-P_v(s')|\leq K\epsilon^\alpha\) for some $\alpha\in(0,1]$
-        where $P_v$: marginal distribution of $P$,
+        Moreover, if number of data points of $n$-th curve is comparable to $n^r$ and 
+        \(sup_{v\in[0,1]} sup_{|s-s'|\leq \epsilon} |F_{(v)}(s)-F_{(v)}(s')|\leq K\epsilon^\alpha\) for some $\alpha\in(0,1]$
+        where $F_{(v)}$: marginal cdf of $P$ at $v$,
         then under some conditions,
-        \[sup_{x\in\mathcal{L}^2[0,1]}|FD(x,P_n)-FD(x,P)|\]
+        \[sup_{x\in\mathcal{L}^2[0,1]}|FD(x,\tilde{P_n})-FD(x,P)|\]
         \[=O_p(n^{-r\alpha\beta/\{(1+\alpha)(2\beta+1)\}}) \text{ if } r<(2\beta+1)/\beta\]
         \[=O_p(\{ln(n)/n\}^{\alpha/(1+\alpha)}) \text{ if } r=(2\beta+1)/\beta\]
         \[=O_p(n^{-\alpha/(1+\alpha)}) \text{ if } r>(2\beta+1)/\beta\]
