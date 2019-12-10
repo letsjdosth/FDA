@@ -25,5 +25,9 @@
 *.fls
 *.fdb_latexmk
 
+#beamer
+*.nav
+*.snm
+
 #compressed
 *.zip
