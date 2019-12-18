@@ -66,7 +66,7 @@
 \section{Definition of the depth}
 
 \begin{frame}{definition of depth in $\mathcal{R}^p$}
-As preliminary, I firstly start with introducing a definition of statistical depth on $\mathbb{R}^p$.
+    As a preliminary, start by introducing a definition of statistical depth on $\mathbb{R}^p$.
 
 
 \begin{defn}[statistical depth in $\mathbb{R}^p$, (Zuo and Serfling, 2000b)]
@@ -74,58 +74,59 @@ Let $\mathcal{P}$ be some class of of distributions.
 The bounded and non-negative mapping $D(.,.): \mathbb{R}^p\times \mathcal{P} \rightarrow \mathbb{R}$ is called
 a statistical depth function if it satisfies the following properties:
 \begin{itemize}
-    \item Affine invariance \\
+    \item \textbf{Affine invariance}
         $D(Ax+b,P_{AX+b})=D(X,P_X)$ holds for any $\mathbb{R}^p$-valued random vector $X$,
         any $p\times p$ nonsingular matrix A and any $b\in \mathbb{R}^p$.
-    \item Maximality at center \\
+    \item \textbf{Maximality at center}
         $D(\theta,P)=sup_{x\in\mathbb{R}^p}D(x,P)$ holds for any $P\in\mathcal{P}$
         having a unique center of symmetry $\theta$ w.r.t. some notion of symmetry.
-    \item Monotonicity relative to the deepest point \\
+    \item \textbf{Monotonicity relative to the deepest point}
         For any $P \in \mathcal{P}$ having deepest point $\theta$, $D(x,P)\leq D(\theta+\alpha(x-\theta), P)$
         holds for all $\alpha\in[0,1]$.
-    \item Vanishing at infinity
+    \item \textbf{Vanishing at infinity}
         $D(x,P)\rightarrow0$ as $||x||_{\mathbb{R}^p}\rightarrow\infty$
         for each $P\in\mathcal{P}$.
 \end{itemize}
 \end{defn}
 
 
-Any function $D(.,.)$ that satisfies above properties can be used as statistical depth in $\mathbb{R}^p$.
-I note that, although the definition is made by using population distribution measure but
-in practice we do not know about true one, we can replace it by empirical distribution measure when $n$ curves observed,
+Any function $D(.,.)$ that satisfies properties of above can be used as statistical depth in $\mathbb{R}^p$.
+Note that, although the definition is made by using population distribution measure, 
+in practice, we do not know about true one, we can replace it by empirical distribution measure when $n$ curves observed,
 (denote $P_n$) and can calculate sample depth from that empirical distribution. 
 For validity to this replacement, see below part dealing with consistency.
 
-Next, belows are not necessary, but desirable property when setting statistical depth function D:
+
+Next, below are not necessary, but desirable property when setting statistical depth function D, 
 suggested by Serfling(2006). It is notable because it shows some properties of statistical depth more intuitively than definition does.
 \begin{itemize}
-    \item Symmetry \\
+    \item \textbf{Symmetry}
         If P is symmetric about $\theta$, then so is $D(x,P)$.
-    \item Continuity of D(x,P) as a function of x \\
+    \item \textbf{Continuity of D(x,P) as a function of x}
         (or just have upper semi-continuity)
-    \item Continuity of D(x,P) as a function of P
-    \item Quasi-concavicity as a function of x \\
+    \item \textbf{Continuity of D(x,P) as a function of P}
+    \item \textbf{Quasi-concavicity as a function of x}
         The set $\{x:D(x,P)\geq c\}$ is convex for each real $c$.
 \end{itemize}
 
 I give some examples about some 'toy' depth in $\mathbb{R}^1$.
 \begin{exmp} [on $\mathbb{R}^1$]
-    If we denote $F_P$ as cdf corresponding distribution measure $P$, then
+    If we denote $F_P$ as CDF corresponding distribution measure $P$, then
     \begin{itemize}
-        \item (By Fraiman, Muniz(2001))
+        \item By Fraiman, Muniz(2001)
         \[D(x,P)=1/2-[1/2-F_P(x)]\]
-        \item (Halfspace depth, By Tukey(1975))
+        \item Halfspace depth, By Tukey(1975)
         \[D(x,P)=min\{F_P(x), lim_{v\rightarrow x-}F_P(v)\}\]
-        \item (Simplical depth, By Liu(2001))
+        \item Simplical depth, By Liu(2001)
         \[D(x,P)=F_P(x)\{1-lim_{v\rightarrow x-} F_P(v)\}\]
-        \item (Modified band depth, By Cuevas, Fraiman(2009))
+        \item Modified band depth, By Cuevas, Fraiman(2009)
         \[D(x,P)=\frac{1}{J-1}\sum_{j=2}^J P(x\in [min(X_1,...,X_j), max(X_1,...,X_j)])\]
     \end{itemize}
 \end{exmp}
 \end{frame}
 
 \begin{frame}{definition of depth in $\mathcal{F}$}
-Now, I will introduce the definition of the functional depth, as one of the latest expansions of ordinary depth
+Now, let us look the definition of the functional depth, as one of the latest expansions of depth in $\mathbb{R}^p$ 
 suggested by Nieto-Reyes and Battey.
 \begin{defn}[statistical depth in $\mathcal{F}$, (Nieto-Reyes and Battey, 2016)]
     Let $(\mathcal{F},A,P)$ be probability space and $\mathcal{P}$ be class of all distribution measures on $\mathcal{F}$,
@@ -133,19 +134,19 @@ suggested by Nieto-Reyes and Battey.
     The bounded and non-negative mapping $D(.,.): \mathcal{F}\times \mathcal{P} \rightarrow \mathbb{R}$ is called
     a statistical functional depth function if it satisfies the following properties:
     \begin{enumerate}
-        \item distance invariance \\
+        \item \textbf{distance invariance}
             $D(f(x),P_{f(X)})=D(X,P_X)$ for any $x\in\mathcal{F}$ and $f:\mathcal{F}\rightarrow\mathcal{F}$
             such that for any $y\in\mathcal{F}$, $d(f(x),f(y))=a_fd(x,y)$, $a_f\in\mathbb{R}-\{0\}$.
-        \item Maximality at center \\
+        \item \textbf{Maximality at center}
             For any $P\in\mathcal{P}$ with unique center of symmetry 
             $\theta$ w.r.t. some notion of symmetry, 
             $D(\theta,P)=sup_{x\in\mathcal{F}}D(x,P)$.
-        \item Monotonicity (strictly decreasing) relative to the deepest point \\
+        \item \textbf{Monotonicity (strictly decreasing) relative to the deepest point}
             For any $P \in \mathcal{P}$ s.t. $D(z,P)=max_{x\in\mathcal{F}}D(x,P)$ exists (:deepest point $z$), 
             for $x,y\in\mathcal{F}$, $D(x,P)<D(y,P)<D(z,P)$ s.t. $min\{d(y,z),d(y,x)\}>0$ and $max\{d(y,z), d(y,x)\}<d(x,z)$.
-        \item Upper semi-continuity in $x$ \\
+        \item \textbf{Upper semi-continuity in $x$}
             $D(x,P)$ is upper semi-continuous as a function of $x$.
-        \item Receptivity to convex hull width across the domain. \\
+        \item \textbf{Receptivity to convex hull width across the domain}
             Let $C(\mathcal{F},P)$ be convex hull in $(\mathcal{F},A,P)$ defined as
             \(C(\mathcal{F},P)=\{x\in\mathcal{F} : x(v)=\alpha L(v)+ (1-\alpha)U(v), v\in V, \alpha\in[0,1]\}\)
             where $U=\{sup_{x\in E}x(v):v\in V\}$, $L=\{inf_{x\in E}x(v):v\in V\}$
@@ -156,84 +157,86 @@ suggested by Nieto-Reyes and Battey.
             s.t. $f(y(v))=\alpha(v)y(v)$ with $\alpha(v)\in(0,1)$ for all $v\in L_{\delta}$ and $\alpha(v)=1$  otherwise
             where \(L_\delta = argsup_{H\in V} \{sup_{x,y\in C(\mathcal{F},P)} d(x(H),y(H)) \leq \delta\}\)
             for any $\delta\in inf_{v\in V}d(L(v),U(v)), d(L,U)$ s.t. $\lambda(L_\delta)>0$ and $\lambda(L_\delta^c)>0$.
-        \item Continuity in P \\ 
+        \item \textbf{Continuity in P}
             For all $x\in\mathcal{F}$, for all $P \in \mathcal{P}$ and for every $\epsilon>0$,
             there exists a $\delta(\epsilon)>0$ s.t. $|D(x,Q)-D(x-P)|\leq\epsilon$ P-almost surely for all $Q\in\mathcal{P}$ with
             $d_P(Q,P)<\delta$ P-almost surely, where $d_P$ is metric on $\mathcal{P}$.
         \end{enumerate}
     \end{defn}
 
-I should give an caveat. The definition of functional depth is being studied for now, so
-there are still different views about it and many researchers are trying to
-suggest better property bundle for it. So, above definition are not concrete, not absolute-unique thing.
-
-For other suggestion, next ones are often viewed :
+Here is a caveat. Studies for the definition of functional depth have been continuing, so
+there are still different views about it, and many researchers are trying to
+suggest a better property bundle for it. So, the above definition is not concrete, neither the absolute nor unique thing.
+    
+    
+In other contexts, the next ones are sometimes presented instead of some parts of the above properties.
 \begin{itemize}
     \item 'convex depth level set'(ex. Narisetty and Nair, 2015)
     \item 'null at the boundary'(or, similarly 'Vanishing at infinity')(Mosler and Polyakov, 2012)
-    \item 'non-degeneracy with gaussian process class' (Chakraborty and Chaudhuri, 2014b)
+    \item 'non-degeneracy with Gaussian process class' (Chakraborty and Chaudhuri, 2014b)
     \item 'maximal value at 0 on some Gaussian-type processes (or curves).
 \end{itemize}
+Nevertheless, the definition of Nieto-Reyes and Battey's implies many ones in these alternatives.
 
-Additionally, I comment for each property of above definition.
+Additionally, here are comments on each property of the above definition.
 \begin{enumerate}
-    \item It is direct expansion of 'Affine invariance' from the definition of depth on $\mathbb{R}^p$.
+    \item It is a direct expansion of 'Affine invariance' from the definition of depth on $\mathbb{R}^p$.
     It means that depth should be invariant with transformation without changing centrality.
     Especially, with just rescaled distance metric.
     
-    \item It is also direct expansion of 'Maximality at center' the definition on $\mathbb{R}^p$'s.
-    Since we are working in metric space, the condition is rewritten like 
+    \item It is also a direct expansion of 'Maximality at the center' the definition on $\mathbb{R}^p$'s.
+    Since we are working in metric space, rephrase the condition of $\mathbb{R}^p$ as
     some form of triangle inequality using distance.
-    And I note that, it implies 'Maximality at 0 with gaussian process' of one item of other suggestion.
+    Moreover, note that it implies 'Maximality at 0 with Gaussian process' of one item of other suggestion.
 
-    But, if strictly speaking, in general the notion - the center of the distribution on function space - has much ambiguousness itself,
-    especially if we consider other distributions except gaussian or trivial ones with properties like stationary, having obvious mean, symmetric, continuous, etc.
-    So, We can say that the definition above has similar problem.
+    But, if strictly speaking, in general, the notion - the center of the distribution on function space - has much ambiguousness itself,
+    especially if we consider other distributions except for Gaussian or trivial ones with properties 
+    like stationary, having prominent mean, symmetric, continuous property.
+    So, We can say that the definition above has a similar problem.
+
+    \item It is an expansion of 'monotonicity relative to the deepest point' and 'vanishing at infinity.'
+    The strictness may be too restrictive. If there is not, it does not violate the notion of the statistical depth.
     
-    \item It is expansion of 'monotonicity relative to the deepest point' and 'vanishing at infinity'.
-    In fact, the strictness is too restrictive. If there isn't, it does not violation of the notion of the depth.
-    
-    But, in practice, because some suggested depths in past have some 'degeneracy problem': all curves have
-    same depth despite having different level of centrality at some specific distributions,
+    But, in practice, because some suggested depths in the past have some 'degeneracy problem': all curves have
+    same depth despite having a different level of centrality at some specific distributions,
     this strictness may help to exclude them that make a situation like degeneracy.
 
-    And, the strictness can be used for more efficient application like classification.
-    Moreover, with second property, this property implies 'null at boundary'.
+    Furthermore, the strictness can help more efficient application like classification. 
+    Besides, with the second property, this property implies 'null at the boundary.'
 
-    \item This property is for relation between the depth and the distribution measure, especially 
-    cumulative distribution function. Since cdf has upper-semi continuity property,
-    for using the depth to estimate the cdf, the depth have better to have this property, too.
+    \item This property is for a relation between the depth and the distribution measure, especially cumulative distribution function. 
+    Because CDF has an upper-semi continuity property,
+    for using the depth to estimate the CDF, the depth has better to have this property, too.
 
-    \item This is property that Nieto-Reyes and Battey, who suggest this definition, add newly. 
+    \item This is a property that Nieto-Reyes and Battey, who suggest this definition, add newly. 
     Their intention is, they want for the depth to have some robustness 
     that having low influence level in their depth of curve with 'small difference',
-    when some curves are varying in part of domain which data exhibit little variability, 
+    when some curves are varying in part of the domain which data exhibit little variability, 
     
-    But I think the mathematical expression of the condition has too restrictive part,
-    when think the validity of strict inequality, considering to their intention.
+    But I think the mathematical expression of the condition has too restrictive parts,
+    when thinking about the validity of strict inequality, considering their intention.
 
-    \item It is for consistency of the depth. When empirical distribution to true distribution,
-    if their depth is not converge, it may be ridiculous thing. For excluding these situation,
-    we set proper depth function having property that converges well when both cases that 
-    the number of the curves is larger and the number of data points grows up.
     
+    \item It is for consistency of the depth. When empirical distribution to correct distribution,
+    if its depth does not converge, it may be a ridiculous thing. 
+    For excluding this situation, we set proper depth function having the property 
+    that converges well when both cases that the number of the curves is more significant 
+    and the number of data points grows up.
 \end{enumerate}
-
 \end{frame}
-
 
 
 \begin{frame}{Check the validity of existing depth on $\mathcal{F}$}
 Below are some 'classical' functional depths.
-(They are frequently cited at other authors' papers 
-for comparing suggested depth by author of itself.)
-Bold letters indicates whether each depth satisfying above 1-6 properties respectively.
+(Authors of other papers frequently cite them
+for comparing suggested depths by themselves.)
+Bold letters indicate whether each depth is satisfying above 1-6 properties, respectively.
 
-For notation, $\mathcal{L}^2$ means the space of square integrable function with its norm,
+For notation, $\mathcal{L}^2$ means the space of square-integrable function with its norm,
 and $\mathcal{C}$ means the space of continuous function.
 Note that, $\mathcal{C}$ equipping sup norm becomes a complete normed vector space (Banach space)
-without inner product, but it is not problem because above definition is on metric space
-which is more general setting than inner product space or normed space.
+without inner product, but it is not a problem because the above definition is on metric space
+which is a more general setting than inner product space or normed space.
 
 \begin{itemize}
     \item h-depth (Cuevas, Febrero and Fraiman(2007)) : \textbf{FTTTTT}\\
@@ -290,28 +293,29 @@ There are some notions about consistency for statistical depths.
     then we say $D$ is universally consistent over $\mathcal{F}$.
 \end{defn}
     
-The consistency theorems depend on below theorem, guaranteeing that
+The consistency theorems depend on the below theorem, guaranteeing that
 empirical distribution from samples converges to true population distribution.
 \begin{thm}[Varadarajan(1956)]
-    Let $(S,d)$ be a sparable metric space and $\mu$ be any distribution (Borel probability measure) on S.
+    Let $(S,d)$ be a separable metric space and $\mu$ be any distribution (Borel probability measure) on S.
     Then the empirical measure $\mu_n$ converges to $\mu$ almost surely:
     \[P(\{w:\mu_n(.)(w)\rightarrow\mu\})=1\]
 \end{thm}
 The proof can be found by many books about probability theory, like 'Real analysis and probability' by Dudley.
 
-I'll introduce only the statements of consistency theorems without proof,
-since they are too long to shift all thing to here. If need, see of each paper's.
+
+I will introduce only the statements of consistency theorems without proof since they are too long to shift all things here. 
+If need, see each paper.
 
 \begin{thm}[Consistency of functional band depth (Gijbels, Nagy(2015))]
     $BD(x,P)$ is not uniformly consistent over compact subset of $\mathcal{C}$.
 \end{thm}
 
 Because the band type depths are naturally expanded from multi-finite dimensional one and 
-use very intuitive notion, Many researchers try to adjust it to satisfy consistency.
+use a very intuitive notion, so many researchers try to adjust it to satisfy consistency.
 
 One possible remedy is here: smoothing with integration and decreasing function $w:[0,\infty)\rightarrow[0,1],w(0)=1,w(\infty)\rightarrow 0$ \\
 Adjusted band depth: \(aBD(x,P)=Ew(inf_{y\in Band(X_1,...,X_k)} ||x-y||)\) for all $x\in\mathcal{C},P\in\mathcal{P}$.
-Then, aBD is universally consistent over $\mathcal{C}$. But as cost, lose some simplicity which original one has.
+Then, aBD is universally consistent over $\mathcal{C}$. However, as cost, lose some simplicity which original one has.
 
 Next, here is the consistency theorem for infimal type depths.
 \begin{thm}[Consistency of functional infimal depth (Gijbels, Nagy(2015))]
@@ -323,10 +327,10 @@ Next, here is the consistency theorem for infimal type depths.
     \end{itemize}
 \end{thm}
 Note that the conditions are too restrictive. We can observe that $ID(x,P)$ is not universally consistent over $\mathcal{C}$.
-What is worse, even Wiener measure (Gaussian measure) fails to satisfy them.
-To consider intuitively, see Brownian motion processes start at 0. Then they are
-same depth (same boundary level!) regardless of each of behavior at rear.
-And this degeneracy cannot be solved even if the number of curves become larger.
+What is worse, even a Wiener measure (a Gaussian measure) fails to satisfy them.
+For a problematic case intuitive, consider some Brownian motion processes start at 0. Then they are
+same depth (same boundary level!) regardless of differences of each of behavior at $t>0$ part.
+Moreover, this degeneracy cannot be solved even if the number of curves becomes large.
 
 Finally, this is the consistency theorem for integrated type depths.
 \begin{thm}[Consistency of functional integrated depth (Nagy, Gijbels, Omelka, Hlubinka(2016))]
@@ -338,10 +342,10 @@ Borel-measurable (may be discontinuous) functions, include $\mathcal{L}^2$.
 
 
 \begin{frame}{Consistency of functional depth: In practice}
-Since in practice we can get only finite data points for each curves, we need two direction's convergence property. 
+Since, in practice, we can get only finite data points for each curve, we need two direction's convergence property. 
 The first is of the direction of the number of curves grows, and the second is of the direction of the number of data points grows for each curve.
-It is so complicate to deal with, so there are a little proofs of consistency for only special types of depths, but not for general depths.
-Below theorem is only for adjust band depth type, h-depth type and integrated type depth.
+It is too complicated to deal with, so there are little proofs of consistency, but only particular types of depths, not for general cases of depths.
+The below theorem is only for adjusted band depth type, h-depth type, and integrated type depth.
 
 \begin{thm}[Consistency over partial observability, (Nagy, Ferraty(2018)]
     Let $P\in\mathcal{P}$ on $\mathcal{L}^2[0,1]$ and $\tilde{P_n}$ be empirical distribution of fitted $n$ curves.
@@ -352,11 +356,12 @@ Below theorem is only for adjust band depth type, h-depth type and integrated ty
     If all marginal distribution of $P$ is absolutely continuous, then also true for integrated depth type.
 \end{thm}
 
-The 'some conditions' are too technical for purpose to get intuition, so I intentionally skip them.
-But I should note that they include some conditions on smoothing kernel which is used for fit to curve from data points,
-and they make the depth value calculated on approximated curves converge true depth value on population's distribution.
-If want, see 'Nagy, S., \& Ferraty, F. (2019). Data depth for measurable noisy random functions. Journal of Multivariate Analysis, 170, 95-114.'.
-The proof is proceeded 2 steps. I briefly preview these.
+The 'some conditions' are too technical for the purpose to get intuition, so I intentionally skip them.
+But it is notable that they include some conditions on smoothing kernel which is used to fit curve from data points,
+and they make the depth value calculated on approximated curves converge true depth value on the population's distribution.
+If wanting, see 'Nagy, S., \& Ferraty, F. (2019). Data depth for measurable noisy random functions. Journal of Multivariate Analysis, 170, 95-114.'
+
+The proof proceeds two steps. Now, briefly preview these.
 \begin{enumerate}
     \item show $\tilde{P}_n\rightarrow P$ weakly almost every $\omega\in\Omega$ using Varadarajan theorem and some good properties of fitting kernel.
     \item using the convergence property of inner D (in $\mathbb{R}^p$),
@@ -374,7 +379,7 @@ Lastly, I give some convergence rates that are proved lately by some researchers
     
     Moreover, if number of data points of $n$-th curve is comparable to $n^r$ and 
     \(sup_{v\in[0,1]} sup_{|s-s'|\leq \epsilon} |F_{(v)}(s)-F_{(v)}(s')|\leq K\epsilon^\alpha\) for some $\alpha\in(0,1]$
-    where $F_{(v)}$: marginal cdf of $P$ at $v$,
+    where $F_{(v)}$: marginal CDF of $P$ at $v$,
     then under some conditions,
     \[sup_{x\in\mathcal{L}^2[0,1]}|FD(x,\tilde{P_n})-FD(x,P)|\]
     \[=O_p(n^{-r\alpha\beta/\{(1+\alpha)(2\beta+1)\}}) \text{ if } r<(2\beta+1)/\beta\]
@@ -382,9 +387,9 @@ Lastly, I give some convergence rates that are proved lately by some researchers
     \[=O_p(n^{-\alpha/(1+\alpha)}) \text{ if } r>(2\beta+1)/\beta\]
 \end{thm}
 Note that last case means some similar situation of the dense setting case. 
-And we can observe that the rate is similar to full observing case.
+We can observe that the rate is similar to a full observing case.
 (think $\alpha=1$ case: the marginal distribution's convergence is fast enough.)
-In other cases such as case of the sparse data points, the convergence becomes slower.
+In other cases, such as the case of the sparse data points, the convergence becomes slower.
 
 \end{frame}
 
@@ -393,7 +398,6 @@ In other cases such as case of the sparse data points, the convergence becomes s
 
 
 \section{Application}
-\begin{frame}{Application}
 \begin{itemize}
     \item Median estimation
     \item Robust and Nonparametric functional statistics \\
@@ -407,17 +411,15 @@ In other cases such as case of the sparse data points, the convergence becomes s
     \item (and other things...)
 \end{itemize}
 
-Now there are many researchers that broaden or newly opening analysis of functional data using depth.
-And right now, another applications are being developed in real time.
+Now there are many researchers who are broadening or newly opening analysis of functional data using depth.
+And right now, another applications are being developed in real-time.
 So, I expect that the notion of the functional depth will be used wider at even near future.
 
-Finally note that, the Usability in application yields some other criteria about defining and comparing depth
-such as computational advantage or the validity of central region or value (besides order) of specific depth.
-For example, a classification problem as a crucial application of depth, the latter is so important.
+Finally, note that the usability in application yields some other criteria about defining and comparing the depth
+such as computational advantage or the validity of the central region or value (besides order) of specific depth.
+For example, a classification problem as a critical application of depth, the latter is so important.
 For this reason, there is the trend when suggesting a new depth, not only a theoretical property, 
-but also an applicability also become more to refer.
-
-\end{frame}
+but also applicability becomes more to refer.
 
 \section{Reference}
 \begin{frame}{main reference}
