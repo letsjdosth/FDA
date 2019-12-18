@@ -2,7 +2,7 @@
    \documentclass[aspectratio=169,ignorenonframetext,9pt]{beamer}
 \or\documentclass[a4paper,11pt]{article}
    \usepackage{url,beamerarticle}
-   \usepackage[margin=1.3in]{geometry}
+   \usepackage[margin=1.35in]{geometry}
 \or\documentclass[a4paper,11pt]{refart}
    \let\example\relax
    \usepackage{url,beamerarticle}
@@ -153,7 +153,7 @@ suggested by Nieto-Reyes and Battey.
 
             Then, $D$ has a property that $D(x,P_X)<D(f(x),P_{f(X)})$ for any $x\in C(\mathcal{F},P)$
             with $D(x,P)<sup_{y\in\mathcal{F}}D(y,P)$ and $f:\mathcal{F}\rightarrow\mathcal{F}$
-            s.t. $f(y(v))=\alpha(v)y(v)$ with $\alpha(v)\in(0,1)$ for all $v\in L_{\delta}$ and $\alpha(v)=1$  otherwise
+            s.t. $f(y(v))=\alpha(v)y(v)$ with $\alpha(v)\in(0,1)$ for all $v\in L_{\delta}$ and $\alpha(v)=1$ otherwise,
             where \(L_\delta = argsup_{H\in V} \{sup_{x,y\in C(\mathcal{F},P)} d(x(H),y(H)) \leq \delta\}\)
             for any $\delta\in inf_{v\in V}d(L(v),U(v)), d(L,U)$ s.t. $\lambda(L_\delta)>0$ and $\lambda(L_\delta^c)>0$.
         \item \textbf{Continuity in P}
@@ -238,22 +238,24 @@ without inner product, but it is not a problem because the above definition is o
 which is a more general setting than inner product space or normed space.
 
 \begin{itemize}
-    \item h-depth (Cuevas, Febrero and Fraiman(2007)) : \textbf{FTTTTT}\\
-    $D_h(x,P)=E_X(K_h(||x-X||_{\mathcal{L}^2[0,1]}))$ on $\mathcal{L}^2[0,1]^p$ 
+    \item h-depth (Cuevas, Febrero and Fraiman(2007)) : \textbf{FTTTTT}
+    \[D_h(x,P)=E_X(K_h(||x-X||_{\mathcal{L}^2[0,1]}))\] on $\mathcal{L}^2[0,1]^p$ 
     \item random-tukey depth (Cuesta-Albertos and Nieto-Reyes(2008)) : \textbf{TTFTFT}\\
-    $D_{RT}(x,P)=min_{u\in\{u_j\}_{j=1}^k}min(P_{(u)}(-\infty,\langle u,x \rangle], P_{(u)}[\langle u,x \rangle,\infty))$ \\
+    \[D_{RT}(x,P)=min_{u\in\{u_j\}_{j=1}^k}min(P_{(u)}(-\infty,\langle u,x \rangle], P_{(u)}[\langle u,x \rangle,\infty))\]
     where $P_{(u)}$: marginal distribution measure of $u$, on $\mathcal{L}^2[0,1]^p$
-    \item band depth(Lopez-Pintado and Romo(2009)) : \textbf{TTFTFT}\\
-    $D_J(x,P)=\sum_{j=2}^J P_{S_j}(x\in S_j(P))$ where $S_j(P)=\{y\in\mathcal{F} : y(v)=\alpha_1X_1(v)+...+\alpha_jX_j(v), \alpha_k\in$(j-th dim simplex),$ v\in V, X_i\sim P\}$
+    \item band depth(Lopez-Pintado and Romo(2009)) : \textbf{TTFTFT}
+    \[D_J(x,P)=\sum_{j=2}^J P_{S_j}(x\in S_j(P))\] 
+    where $S_j(P)=\{y\in\mathcal{F} : y(v)=\alpha_1X_1(v)+...+\alpha_jX_j(v), \alpha_k\in$(j-th dim simplex), $v\in V, X_i\sim P\}$
     on $\mathcal{C}$ with sup norm 
-    \item modified band depth (Lopez-Pintado and Romo(2009)) : \textbf{TTFTFT}\\
-    $D_{MJ}(x,P)=\sum_{j=2}^J E(\lambda \{v\in V : x(v)\in S_j(P)\})$ with above notation,
-    on $\mathcal{C}$ with sup norm 
-    \item half-region depth (Lopez-Pintado and Romo(2011)) : \textbf{TFFTFT}\\
-    $D_{HR}(x,P)=min\{P(X\in H_x), P(X\in E_x)\}$ where $H_x=\{y\in\mathcal{F} : y(v)\leq x(v) \text{ for all } v\in V\}$ and 
+    \item modified band depth (Lopez-Pintado and Romo(2009)) : \textbf{TTFTFT}
+    \[D_{MJ}(x,P)=\sum_{j=2}^J E(\lambda \{v\in V : x(v)\in S_j(P)\})\] 
+    with above notation, on $\mathcal{C}$ with sup norm 
+    \item half-region depth (Lopez-Pintado and Romo(2011)) : \textbf{TFFTFT}
+    \[D_{HR}(x,P)=min\{P(X\in H_x), P(X\in E_x)\}\]
+    where $H_x=\{y\in\mathcal{F} : y(v)\leq x(v) \text{ for all } v\in V\}$ and 
     $E_x=\{y\in\mathcal{F} : y(v)\geq x(v) \text{ for all } v\in V\}$ on $\mathcal{C}$ with sup norm 
-    \item modified half-region depth (Lopez-Pintado and Romo(2011)) : \textbf{TTFTFT}\\
-    $D_{MHR}(x,P)=min\{E(\lambda\{v\in V, X(v)\leq x(v)\}), E(\lambda\{v\in V, X(v)\geq x(v)\})\}/\lambda(V)$
+    \item modified half-region depth (Lopez-Pintado and Romo(2011)) : \textbf{TTFTFT}
+    \[D_{MHR}(x,P)=min\{E(\lambda\{v\in V, X(v)\leq x(v)\}), E(\lambda\{v\in V, X(v)\geq x(v)\})\}/\lambda(V)\]
     on $\mathcal{C}$ with sup norm
 \end{itemize}
 
@@ -376,8 +378,9 @@ Lastly, I give some convergence rates that are proved lately by some researchers
     Then, for any $P\in\mathcal{P}$ on $\mathcal{L}^2[0,1]$, under some conditions,
     \[sup_{x\in\mathcal{L}^2[0,1]}|FD(x,P_n)-FD(x,P)|=O_p(n^{-1/2})\]
     
-    Moreover, if number of data points of $n$-th curve is comparable to $n^r$ and 
-    \(sup_{v\in[0,1]} sup_{|s-s'|\leq \epsilon} |F_{(v)}(s)-F_{(v)}(s')|\leq K\epsilon^\alpha\) for some $\alpha\in(0,1]$
+    Moreover, if number of data points of $n$-th curve is comparable to $n^r$, and
+    \[sup_{v\in[0,1]} sup_{|s-s'|\leq \epsilon} |F_{(v)}(s)-F_{(v)}(s')|\leq K\epsilon^\alpha\]
+    for some $\alpha\in(0,1]$
     where $F_{(v)}$: marginal CDF of $P$ at $v$,
     then under some conditions,
     \[sup_{x\in\mathcal{L}^2[0,1]}|FD(x,\tilde{P_n})-FD(x,P)|\]
